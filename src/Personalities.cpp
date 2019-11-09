@@ -1,7 +1,7 @@
 #include "Personalities.hpp"
 
 Personalities::Personalities():
-	_names({"Armen", "Guitton" ,"Scify"}), _owners({-1, -1, -1}), _cost({500000, 500000, 500000})
+	 _owners({-1, -1, -1}), _names({"Armen", "Guitton" ,"Scify"}), _cost({500000, 500000, 500000})
 {
 }
 
