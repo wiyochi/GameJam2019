@@ -52,7 +52,7 @@ Case::Case(std::wstring const & name, Type type, sf::Vector2f const & pos, sf::V
         path.append("card_purple.png");
         break;
     }
-    _rect.setFillColor(c);
+    //_rect.setFillColor(c);
 
     if (_font.loadFromFile(FONT_PATH))
 	{
@@ -113,6 +113,12 @@ std::wstring const & Case::get_name() const
 sf::RectangleShape& Case::get_rect()
 {
     return _rect;
+}
+
+void Case::rotate(float angle)
+{
+    _rect.rotate(angle);
+    _country.rotate(angle);
 }
 
 void Case::draw(sf::RenderTarget& target, sf::RenderStates states) const

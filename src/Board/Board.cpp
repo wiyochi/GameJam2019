@@ -7,9 +7,9 @@ Board::Board(sf::Vector2f pos)
     _rect.setOutlineColor(sf::Color::White);
     _rect.setFillColor(sf::Color::Transparent);
 
-    sf::Vector2f cases_size(CASES_X[1] - CASES_X[0], CASES_Y[NB_CASES - 1] - CASES_Y[0]);
+    sf::Vector2f cases_size(100.f, 150.f);
 
-    _rect.setSize(sf::Vector2f(cases_size.x * (NB_CASES / 4 + 1), cases_size.y * (NB_CASES / 4 + 1)));
+    _rect.setSize(sf::Vector2f(cases_size.x * (NB_CASES / 4) + 2 * cases_size.y, cases_size.x * (NB_CASES / 4) + 2 * cases_size.y));
 
     unsigned int div = NB_CASES / 4;
     // Cases creation
@@ -27,14 +27,17 @@ Board::Board(sf::Vector2f pos)
             _cases[i] = new Pays(std::wstring(CASES_NAMES[i]), CASES_TYPES[i], sf::Vector2f(pos.x + CASES_X[i], pos.y + CASES_Y[i]), cases_size);
             break;
         }
-
-        if (i >= div && i < div * 2)
-            _cases[i]->get_rect().rotate(90.f);
-        else if (i >= div * 3 && i < div * 4)
-            _cases[i]->get_rect().rotate(-90.f);
+        if (i < div)
+            ;
+        else if (i < div * 2)
+            _cases[i]->rotate(90.f);
+        else if (i < div * 3)
+            _cases[i]->rotate(180.f);
+        else if (i < div * 4)
+            _cases[i]->rotate(-90.f);
     }
 
-    _view = new View(sf::Vector2f(pos.x + cases_size.x + 10, pos.y + cases_size.y + 10), sf::Vector2f(cases_size.x * (NB_CASES / 4 - 1) - 20, cases_size.y * (NB_CASES / 4 - 1) - 20));
+    _view = new View(sf::Vector2f(pos.x + cases_size.y + 10, pos.y + cases_size.y + 10), sf::Vector2f(cases_size.x * (NB_CASES / 4) - 20, cases_size.x * (NB_CASES / 4) - 20));
 }
 
 Board::~Board()
@@ -60,7 +63,6 @@ void Board::update(sf::Window& window)
         {
             (*c)->set_viewed(false);
             _view->set_case(*c);
-            std::wcout << L"Nouveau viewed: " << _view->get_case()->get_name() << std::endl;
         }
     }
 }

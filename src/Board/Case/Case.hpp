@@ -32,6 +32,7 @@ public:
     bool get_viewed() const;
     std::wstring const & get_name() const;
     sf::RectangleShape& get_rect();
+    void rotate(float angle);
 
 protected:
     sf::Texture         _texture;

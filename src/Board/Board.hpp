@@ -24,25 +24,32 @@ constexpr Case::Type        CASES_TYPES[NB_CASES] = {
     Case::Goulag, Case::Taxes, Case::Live, Case::Chance, Case::Goulag
 };
 
+/*
 constexpr float             CASES_X[NB_CASES] = {
     0.0f, 100.f, 200.f, 300.f, 400.f, 500.f,
     500.f, 500.f, 500.f, 500.f, 500.f,
     400.f, 300.f, 200.f, 100.f, 0.f,
     0.f, 0.f, 0.f, 0.f
 };
-/*
-constexpr float             CASES_Y[NB_CASES] = {
-    0.0f, 0.f, 0.f, 0.f, 0.f, 0.f,
-    150.f, 250.f, 350.f, 450.f, 550.f,
-    750.f, 750.f, 750.f, 750.f, 750.f,
-    600.f, 450.f, 300.f, 150.f
-};*/
 
 constexpr float             CASES_Y[NB_CASES] = {
     0.0f, 0.f, 0.f, 0.f, 0.f, 0.f,
     100.f, 200.f, 300.f, 400.f, 500.f,
     500.f, 500.f, 500.f, 500.f, 500.f,
     400.f, 300.f, 200.f, 100.f
+};*/
+constexpr float             CASES_X[NB_CASES] = {
+    150.0f, 250.f, 350.f, 450.f, 550.f,
+    800.f, 800.f, 800.f, 800.f, 800.f,
+    650.f, 550.f, 450.f, 350.f, 250.f,
+    0.f, 0.f, 0.f, 0.f, 0.f
+};
+
+constexpr float             CASES_Y[NB_CASES] = {
+    0.0f, 0.f, 0.f, 0.f, 0.f,
+    150.f, 250.f, 350.f, 450.f, 550.f,
+    800.f, 800.f, 800.f, 800.f, 800.f,
+    650.f, 550.f, 450.f, 350.f, 250.f
 };
 
 class Board : public sf::Drawable
