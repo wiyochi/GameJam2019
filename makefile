@@ -29,6 +29,10 @@ clean:
 run:
 	@export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:./lib/SFML-2.5.1/lib; ./$(TARGET)
 
+# Running
+valgrind:
+	@export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:./lib/SFML-2.5.1/lib; valgrind ./$(TARGET)
+
 build-and-run:
 	@make
 	@make run
