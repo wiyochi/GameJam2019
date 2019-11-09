@@ -46,6 +46,7 @@ public:
     ~Board();
 
     void update(sf::Window& window);
+    int & get_code();
 
 private:
     Button * _dice_button;
@@ -62,6 +63,8 @@ private:
     sf::RectangleShape          _rect;
     std::array<Case*, NB_CASES> _cases;
     View*                       _view;
+
+    int _code;
     
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };

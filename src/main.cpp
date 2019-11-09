@@ -18,7 +18,6 @@ int main()
     STATES state = MAIN_MENU;
     
     Game g(20, 2);
-   // g.run();
 
 
 
@@ -47,6 +46,8 @@ int main()
                 // Updates
                 b->update(window);
 
+                g.update(b->get_code());
+                
                 // Draws
                 window.draw(*b);
                 break;

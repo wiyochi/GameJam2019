@@ -10,7 +10,8 @@ Board::Board(sf::Vector2f pos):
 	_buy_armen_button(new Button(L"Corrompre Armen", sf::Vector2f(900, 400), sf::Vector2f(200, 40))),
 	_event_1_button(new Button(L"Organiser un meeting", sf::Vector2f(900, 450), sf::Vector2f(200, 40))),
 	_event_2_button(new Button(L"Organiser une conférence", sf::Vector2f(900, 500), sf::Vector2f(200, 40))),
-	_event_spe_button(new Button(L"Organiser l'évènement spécial", sf::Vector2f(900, 550), sf::Vector2f(200, 40)))
+	_event_spe_button(new Button(L"Organiser l'évènement spécial", sf::Vector2f(900, 550), sf::Vector2f(200, 40))),
+    _code(0)
 {
     _dice_p_button->set_active(false);
     _dice_m_button->set_active(false);
@@ -65,6 +66,40 @@ Board::~Board()
 
 void Board::update(sf::Window& window)
 {
+    // Code d'updates
+
+    switch(_code)
+    {
+        case 0:
+            _dice_p_button->set_active(true);
+            _dice_p_button->set_active(false);
+            _dice_m_button->set_active(false);
+            _dice_e_button->set_active(false);
+            _buy_cfy_button->set_active(false);
+            _buy_guitton_button->set_active(false);
+            _buy_armen_button->set_active(false);
+            _event_1_button->set_active(false);
+            _event_2_button->set_active(false);
+            _event_spe_button->set_active(false);
+            _code = 1;
+            break;
+        case 11:
+            _dice_p_button->set_active(false);
+            _dice_p_button->set_active(true);
+            _dice_m_button->set_active(true);
+            _dice_e_button->set_active(true);
+            _buy_cfy_button->set_active(false);
+            _buy_guitton_button->set_active(false);
+            _buy_armen_button->set_active(false);
+            _event_1_button->set_active(false);
+            _event_2_button->set_active(false);
+            _event_spe_button->set_active(false);
+            break;
+
+    }
+
+
+
     // Case updates
     std::for_each(_cases.begin(), _cases.end(), [&](Case* c){ c->update(window); });
 
@@ -89,6 +124,33 @@ void Board::update(sf::Window& window)
 	_event_1_button->update(window);
 	_event_2_button->update(window);
 	_event_spe_button->update(window);
+
+    
+	if(_dice_button->is_clicked())
+        _code = 1;
+	if(_dice_p_button->is_clicked())
+        _code = 2;
+	if(_dice_m_button->is_clicked())
+        _code = 3;
+	if(_dice_e_button->is_clicked())
+        _code = 4;
+	if(_buy_cfy_button->is_clicked())
+        _code = 5;
+	if(_buy_guitton_button->is_clicked())
+        _code = 6;
+	if(_buy_armen_button->is_clicked())
+        _code = 7;
+	if(_event_1_button->is_clicked())
+        _code = 8;
+	if(_event_2_button->is_clicked())
+        _code = 9;
+	if(_event_spe_button->is_clicked())
+        _code = 10;   
+}
+
+int & Board::get_code()
+{
+    return _code;
 }
 
 void Board::draw(sf::RenderTarget& target, sf::RenderStates states) const

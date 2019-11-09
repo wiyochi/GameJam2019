@@ -19,6 +19,7 @@ private:
 	std::vector<Player> _players;	// Liste des joueurs
 	const uint16_t _max_turn; 		// Nombre total de tour dans la partie
 	int _nb_turn;					// Nombre de tour actuellement joué
+	ushort _dice_value;
 
 	void do_events(ushort const & player, ushort const & event);
 	void do_personalities(ushort const & player, short const & personalities);
@@ -27,6 +28,7 @@ public:
 	void end_of_turn();
 	void turn(); 					// Execute toute la partie (tous les tours)
 	void run();						// Fais jouer chaque joueur à son tour
+	void update(int & code); 					// Remplace run avec l'interface graphique
 };
 
 #endif
