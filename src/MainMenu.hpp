@@ -6,19 +6,21 @@
 #include <vector>
 #include <SFML/Graphics.hpp>
 
+#include "UI/Button.hpp"
+
 class MainMenu : public sf::Drawable
 {
 private:
 	int _menu_code;
-    sf::RectangleShape _rect;
-    sf::Font _font;
-    sf::Text _text;
-    static bool         left_click_pressed;
+    Button *_start_button;
+    Button *_help_button;
+    Button *_quit_button; 
 public:
 	MainMenu();
+    ~MainMenu();
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	void update(sf::Window& window);
-	int get_menu_code() const;
+	int get_menu_code();
 };
 
 #endif

@@ -5,11 +5,12 @@ Game::Game(uint16_t max_turn, ushort nb_players):
 {
 	for (ushort i = 0; i < nb_players; i++)
 	{
-		std::string name;
-		std::cin >> name;
+		std::ostringstream oss;
+		oss << "Player " << i + 1;
+		std::string name = oss.str();
 		_players.push_back(Player(name));
 	}
-	std::getchar();
+	//std::getchar();
 	
 }
 

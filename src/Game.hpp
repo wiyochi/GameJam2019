@@ -2,6 +2,7 @@
 #define GAME_HPP_
 
 #include <iostream>
+#include <sstream>
 #include <string>
 #include <vector>
 
