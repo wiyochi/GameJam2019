@@ -36,3 +36,6 @@
 # bins
 bin/
 build/
+
+# settings
+.vscode/
