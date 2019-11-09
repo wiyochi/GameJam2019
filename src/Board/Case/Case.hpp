@@ -31,6 +31,7 @@ public:
     void set_viewed(bool b);
     bool get_viewed() const;
     std::wstring const & get_name() const;
+    sf::RectangleShape& get_rect();
 
 protected:
     sf::Texture         _texture;

@@ -11,6 +11,7 @@ Board::Board(sf::Vector2f pos)
 
     _rect.setSize(sf::Vector2f(cases_size.x * (NB_CASES / 4 + 1), cases_size.y * (NB_CASES / 4 + 1)));
 
+    unsigned int div = NB_CASES / 4;
     // Cases creation
     for (size_t i = 0; i < NB_CASES; i++)
     {
@@ -26,6 +27,11 @@ Board::Board(sf::Vector2f pos)
             _cases[i] = new Pays(std::wstring(CASES_NAMES[i]), CASES_TYPES[i], sf::Vector2f(pos.x + CASES_X[i], pos.y + CASES_Y[i]), cases_size);
             break;
         }
+
+        if (i >= div && i < div * 2)
+            _cases[i]->get_rect().rotate(90.f);
+        else if (i >= div * 3 && i < div * 4)
+            _cases[i]->get_rect().rotate(-90.f);
     }
 
     _view = new View(sf::Vector2f(pos.x + cases_size.x + 10, pos.y + cases_size.y + 10), sf::Vector2f(cases_size.x * (NB_CASES / 4 - 1) - 20, cases_size.y * (NB_CASES / 4 - 1) - 20));

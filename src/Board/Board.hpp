@@ -30,6 +30,13 @@ constexpr float             CASES_X[NB_CASES] = {
     400.f, 300.f, 200.f, 100.f, 0.f,
     0.f, 0.f, 0.f, 0.f
 };
+/*
+constexpr float             CASES_Y[NB_CASES] = {
+    0.0f, 0.f, 0.f, 0.f, 0.f, 0.f,
+    150.f, 250.f, 350.f, 450.f, 550.f,
+    750.f, 750.f, 750.f, 750.f, 750.f,
+    600.f, 450.f, 300.f, 150.f
+};*/
 
 constexpr float             CASES_Y[NB_CASES] = {
     0.0f, 0.f, 0.f, 0.f, 0.f, 0.f,

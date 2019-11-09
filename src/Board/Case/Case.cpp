@@ -110,6 +110,11 @@ std::wstring const & Case::get_name() const
     return _name;
 }
 
+sf::RectangleShape& Case::get_rect()
+{
+    return _rect;
+}
+
 void Case::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     target.draw(_rect, states);
