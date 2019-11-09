@@ -2,6 +2,7 @@
 #define CASE_H_
 
 #include <string>
+#include <iostream>
 #include <SFML/Graphics.hpp>
 
 constexpr char FONT_NODE_PATH[] = "resources/fonts/Roboto-Thin.ttf";
@@ -27,6 +28,9 @@ public:
 
     Type get_type() const;
     virtual void update(sf::Window& window);
+    void set_viewed(bool b);
+    bool get_viewed() const;
+    std::wstring const & get_name() const;
 
 protected:
     sf::RectangleShape  _rect;
@@ -34,6 +38,7 @@ protected:
     sf::Text            _country;
     Type                _type;
     std::wstring        _name;
+    bool                _viewed;
 
     static bool         left_click_pressed;
 

@@ -17,6 +17,10 @@ int main()
                 window.close();
         }
 
+        // Updates
+        b->update(window);
+
+        // Draws
         window.clear();
         window.draw(*b);
         window.display();

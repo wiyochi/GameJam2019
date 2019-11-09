@@ -66,12 +66,29 @@ void Case::update(sf::Window& window)
     sf::Vector2f mouse_pos(sf::Mouse::getPosition(window));
     if (_rect.getGlobalBounds().contains(mouse_pos) && sf::Mouse::isButtonPressed(sf::Mouse::Left) && !left_click_pressed)
     {
+        std::wcout << _name << std::endl;
+        set_viewed(true);
         left_click_pressed = true;
     }
     else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left) && left_click_pressed)
     {
         left_click_pressed = false;
     }
+}
+
+void Case::set_viewed(bool b)
+{
+    _viewed = b;
+}
+
+bool Case::get_viewed() const
+{
+    return _viewed;
+}
+
+std::wstring const & Case::get_name() const
+{
+    return _name;
 }
 
 void Case::draw(sf::RenderTarget& target, sf::RenderStates states) const

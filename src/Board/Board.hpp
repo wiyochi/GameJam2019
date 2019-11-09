@@ -8,6 +8,7 @@
 #include "Case/Pays.hpp"
 #include "Case/Taxes.hpp"
 #include "Case/Chance.hpp"
+#include "View.hpp"
 
 constexpr unsigned int NB_CASES = 20;
 constexpr std::wstring_view  CASES_NAMES[NB_CASES] = {
@@ -43,9 +44,13 @@ public:
     Board(sf::Vector2f pos);
     ~Board();
 
+    void update(sf::Window& window);
+
 private:
     sf::RectangleShape          _rect;
     std::array<Case*, NB_CASES> _cases;
+    Case*                       _case_viewed;
+    View*                       _view;
     
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };

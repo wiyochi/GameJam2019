@@ -8,7 +8,10 @@ Board::Board(sf::Vector2f pos)
     _rect.setFillColor(sf::Color::Transparent);
 
     sf::Vector2f cases_size(CASES_X[1] - CASES_X[0], CASES_Y[NB_CASES - 1] - CASES_Y[0]);
+
     _rect.setSize(sf::Vector2f(cases_size.x * (NB_CASES / 4 + 1), cases_size.y * (NB_CASES / 4 + 1)));
+
+    // Cases creation
     for (size_t i = 0; i < NB_CASES; i++)
     {
         switch (CASES_TYPES[i])
@@ -24,7 +27,8 @@ Board::Board(sf::Vector2f pos)
             break;
         }
     }
-    
+
+    _view = new View(sf::Vector2f(pos.x + cases_size.x + 10, pos.y + cases_size.y + 10), sf::Vector2f(cases_size.x * (NB_CASES / 4 - 1) - 20, cases_size.y * (NB_CASES / 4 - 1) - 20));
 }
 
 Board::~Board()
@@ -35,11 +39,29 @@ Board::~Board()
     // {
     //     delete *i;
     // }
-    
+    delete _view;
+}
+
+void Board::update(sf::Window& window)
+{
+    // Case updates
+    std::for_each(_cases.begin(), _cases.end(), [&](Case* c){ c->update(window); });
+
+    // Check for new view
+    std::for_each(_cases.begin(), _cases.end(), [&](Case* c)
+    {
+        if(c->get_viewed())
+        {
+            c->set_viewed(false);
+            _case_viewed = c;
+            std::wcout << L"Nouveau viewed: " << _case_viewed->get_name() << std::endl;
+        }
+    });
 }
 
 void Board::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     target.draw(_rect, states);
     std::for_each(_cases.begin(), _cases.end(), [&](Case* c){ target.draw(*c, states); });
+    target.draw(*_view, states);
 }
