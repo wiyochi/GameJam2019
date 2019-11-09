@@ -2,12 +2,14 @@
 
 bool Button::left_click_pressed = false;
 
-Button::Button(std::wstring const & name, sf::Vector2f const & pos, sf::Vector2f const & size, sf::Color c) :
+Button::Button(std::wstring const & name, sf::Vector2f const & pos, sf::Vector2f const & size, sf::Color normal_color, sf::Color clicked_color, sf::Color disable_color) :
     _rect(size),
     _name(name),
+    _is_active(true),
     _clicked(false),
-    _rect_color(c),
-    _rect_color_clicked(c)
+    _rect_color(normal_color),
+    _rect_color_clicked(clicked_color),
+    _rect_disable(disable_color)
 {
     _rect.setPosition(pos);
     _rect.setOutlineThickness(2);
@@ -15,8 +17,6 @@ Button::Button(std::wstring const & name, sf::Vector2f const & pos, sf::Vector2f
     outline.a = 150;
     _rect.setOutlineColor(outline);
     _rect.setFillColor(_rect_color);
-
-    _rect_color_clicked.a = 150;
 
     if (_font.loadFromFile(FONT_PATH))
 	{
@@ -36,20 +36,33 @@ Button::~Button()
     
 }
 
+void Button::set_active(bool state)
+{
+    _is_active = state;
+    if (state)
+        _rect.setFillColor(_rect_color);
+    else
+        _rect.setFillColor(_rect_disable);
+    
+}
+
 void Button::update(sf::Window& window)
 {
-    sf::Vector2f mouse_pos(sf::Mouse::getPosition(window));
-    if (_rect.getGlobalBounds().contains(mouse_pos) && sf::Mouse::isButtonPressed(sf::Mouse::Left) && !left_click_pressed)
+    if (_is_active)
     {
-       // std::wcout << L"Button clicked: " << _name << " (" << mouse_pos.x << ";" << mouse_pos.y << ")" << std::endl;
-        left_click_pressed = true;
-        _rect.setFillColor(_rect_color_clicked);
-    }
-    else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left) && left_click_pressed && _rect.getGlobalBounds().contains(mouse_pos))
-    {
-        left_click_pressed = false;
-        _rect.setFillColor(_rect_color);
-        _clicked = true;
+        sf::Vector2f mouse_pos(sf::Mouse::getPosition(window));
+        if (_rect.getGlobalBounds().contains(mouse_pos) && sf::Mouse::isButtonPressed(sf::Mouse::Left) && !left_click_pressed)
+        {
+        // std::wcout << L"Button clicked: " << _name << " (" << mouse_pos.x << ";" << mouse_pos.y << ")" << std::endl;
+            left_click_pressed = true;
+            _rect.setFillColor(_rect_color_clicked);
+        }
+        else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left) && left_click_pressed && _rect.getGlobalBounds().contains(mouse_pos))
+        {
+            left_click_pressed = false;
+            _rect.setFillColor(_rect_color);
+            _clicked = true;
+        }
     }
 }
 
