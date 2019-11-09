@@ -44,6 +44,7 @@ void Player::move(uint16_t dice_value, bool have_sciphy)
 		std::cout << "\t\t3) Diminuer le résultat" << std::endl;
 
 		int choice;
+		std::cin >> choice;
 
 		switch (choice)
 		{

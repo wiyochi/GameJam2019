@@ -1,0 +1,21 @@
+Tooltip :
+	Guitton:
+		Le directeur de l'isima utilise son influence pour augmenter tout vos revenus de 50%.
+	Scify:
+		Le tortionaire utilise ca technique de triche pour vous permettre de diminuer ou d'augmenter le résultat du dé de 1.
+	Armen:
+		Le représentant CapGémini utilise sa tchatche pour répendre votre bonne parole, les augmentations de vos adhérents sont majorées de 30%.
+	
+Aide :
+	But du jeu:
+		Avoir le plus de pays suivants votre cause.
+	Plateau de jeu:
+		Le plateau se compose de 20 cases positionnées en carré.
+		Il est composé de 3 types de cases:
+			- les pays : vous pouvez ici effectuer des actions pour augmenter votre nombre de partisans dans la ville.
+			- les chances : une action aléatoire se produit, bonne ou mauvaise.
+			- les impots : cette case est unique, elle vous fait perdre 50% de vos dollarzz.
+	Fonctionnement:
+		Vous jouez chacun à votre tour.
+		Vous commencez par lancer le dé de 8, le pion se déplace vers la case correspondante.
+		Lorsque vous arrivez sur une case 
