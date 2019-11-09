@@ -28,13 +28,21 @@ void Game::turn()
 	{
 		std::cout << "\tAu tour du joueur : " << _players[i].get_name() << " (" << i << ')' << std::endl;
 		ushort dice_value = rand() % MAX_DICE;
-		ushort event, personalities;
+		ushort event;
+		short personalities;
 		_players[i].play(dice_value, event, personalities);
 		do_events(i, event);
+		do_personalities(i, personalities);
 	}
 }
 
 void Game::do_events(ushort const & player, ushort const & event)
 {
-	
+
+}
+
+void Game::do_personalities(ushort const & player, short const & personality)
+{
+	if (_personalities.get_cost(personality) <= _players[player].get_money())
+		_players[player].set_money(_personalities.get_cost(personality));
 }

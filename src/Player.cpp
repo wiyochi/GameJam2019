@@ -5,12 +5,23 @@ Player::Player(std::string name):
 {
 }
 
+int Player::get_money() const
+{
+	return _money;
+}
+
+void Player::set_money(uint money)
+{
+	_money = money;
+}
+
 std::string const & Player::get_name() const
 {
 	return _name;
 }
 
-void Player::play(ushort dice_value, ushort & event, ushort & personalities)
+
+void Player::play(ushort dice_value, ushort & event, short & personalities)
 {
 	std::getchar();
 	move(dice_value);
@@ -52,34 +63,36 @@ ushort Player::do_board_action()
 		goto before; // ATTENTION GOTO
 	} 
 
+	return choice;
 }
 
-ushort Player::do_personalities_action()
+short Player::do_personalities_action()
 {
 	before2: // ATTENTION GOTO LABEL
 	std::cout << "\tVoulez-vous soudvoyer une personnalitée ? :" << std::endl;
-	std::cout << "\t\t1 : Non" << std::endl;
-	std::cout << "\t\t2 : Armen" << std::endl;
-	std::cout << "\t\t3 : Guitton" << std::endl;
-	std::cout << "\t\t4 : Scify" << std::endl;
+	std::cout << "\t\t-1 : Non" << std::endl;
+	std::cout << "\t\t1 : Armen" << std::endl;
+	std::cout << "\t\t2 : Guitton" << std::endl;
+	std::cout << "\t\t3 : Scify" << std::endl;
 
 	int choice;
 	std::cin >> choice;
 	switch (choice)
 	{
-	case 1:
+	case -1:
 		std::cout << "\tVous décidez de ne rien faire." << std::endl;
 		break;
-	case 2:
+	case 1:
 		std::cout << "\tVous décidez de payer Armen" << std::endl;
 		break;
-	case 3:
+	case 2:
 		std::cout << "\tVous décidez de payer Guitton." << std::endl;
 		break;
-	case 4:
+	case 3:
 		std::cout << "\tVous décidez de payer Scify." << std::endl;
 		break;
 	default:
 		goto before2; // ATTENTION GOTO
 	} 
+	return choice;
 }
