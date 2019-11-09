@@ -36,7 +36,7 @@ void MainMenu::update(sf::Window& window)
 	else if (_quit_button->is_clicked())
 		_menu_code = 3;
 	
-	std::wcout << _menu_code << std::endl;
+	//std::wcout << _menu_code << std::endl;
 }
 
 
