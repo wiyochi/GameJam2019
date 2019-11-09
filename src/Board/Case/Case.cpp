@@ -61,9 +61,11 @@ Case::Case(std::wstring const & name, Type type, sf::Vector2f const & pos, sf::V
 		_country.setString(_name);
 		_country.setStyle(sf::Text::Bold);
 		_country.setCharacterSize(15);
-        _country.setPosition(pos);
 	}
 
+    sf::Rect text_size(_country.getGlobalBounds());
+    _country.setOrigin(pos);
+    _country.setPosition(sf::Vector2f(pos.x + size.x / 2 - text_size.width / 2, pos.y + size.y / 4 - text_size.height / 2));
     
     if (_texture.loadFromFile(path))
     {
@@ -85,7 +87,6 @@ void Case::update(sf::Window& window)
     sf::Vector2f mouse_pos(sf::Mouse::getPosition(window));
     if (_rect.getGlobalBounds().contains(mouse_pos) && sf::Mouse::isButtonPressed(sf::Mouse::Left) && !left_click_pressed)
     {
-        std::wcout << _name << std::endl;
         set_viewed(true);
         left_click_pressed = true;
     }
