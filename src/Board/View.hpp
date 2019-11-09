@@ -1,8 +1,10 @@
 #ifndef VIEW_H_
 #define VIEW_H_
 
+#include <sstream>
 #include <SFML/Graphics.hpp>
 #include "Case/Case.hpp"
+#include "Case/Pays.hpp"
 
 extern const char FONT_PATH[];
 
@@ -16,6 +18,8 @@ public:
     Case* get_case();
 
 private:
+    sf::Vector2f        _pos;
+    sf::Vector2f        _size;
     sf::RectangleShape  _rect;
     Case*               _case;
     sf::Font            _font;
