@@ -6,7 +6,7 @@
 #include <SFML/Graphics.hpp>
 
 extern const char FONT_PATH[];
-
+extern const char TEXTURE_PATH[];
 
 class Case : public sf::Drawable
 {
@@ -33,6 +33,7 @@ public:
     std::wstring const & get_name() const;
 
 protected:
+    sf::Texture         _texture;
     sf::RectangleShape  _rect;
     sf::Font            _font;
     sf::Text            _country;

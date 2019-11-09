@@ -1,6 +1,7 @@
 #include "Case.hpp"
 
 const char FONT_PATH[] = "resources/fonts/Roboto-Thin.ttf";
+const char TEXTURE_PATH[] = "resources/textures/";
 
 bool Case::left_click_pressed = false;
 
@@ -16,29 +17,39 @@ Case::Case(std::wstring const & name, Type type, sf::Vector2f const & pos, sf::V
     _rect.setPosition(sf::Vector2f(pos.x + 1, pos.y + 1));
     _rect.setOutlineThickness(1);
     _rect.setOutlineColor(sf::Color::White);
+
+    std::string path(TEXTURE_PATH);
     sf::Color c = sf::Color::White;
+
     switch (_type)
     {
     case Case::Type::Live:
         c = sf::Color::Red;
+        path.append("card_red.png");
         break;
     case Case::Type::Goulag:
         c = sf::Color::Blue;
+        path.append("card_blue.png");
         break;
     case Case::Type::Propaganda:
         c = sf::Color::Green;
+        path.append("card_green.png");
         break;
     case Case::Type::Education:
         c = sf::Color::Yellow;
+        path.append("card_yellow.png");
         break;
     case Case::Type::Chance:
         c = sf::Color(40, 40, 40);
+        path.append("card_purple.png");
         break;
     case Case::Type::Taxes:
         c = sf::Color(40, 40, 40);
+        path.append("card_purple.png");
         break;
     case Case::Type::USA:
         c = sf::Color(40, 40, 40);
+        path.append("card_purple.png");
         break;
     }
     _rect.setFillColor(c);
@@ -52,6 +63,12 @@ Case::Case(std::wstring const & name, Type type, sf::Vector2f const & pos, sf::V
 		_country.setCharacterSize(15);
         _country.setPosition(pos);
 	}
+
+    
+    if (_texture.loadFromFile(path))
+    {
+        _rect.setTexture(&_texture);
+    }
 }
 
 Case::~Case()
