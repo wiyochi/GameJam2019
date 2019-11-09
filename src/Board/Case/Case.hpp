@@ -17,21 +17,25 @@ public:
         Propaganda,
         Education,
         Chance,
-        Taxes
+        Taxes,
+        USA
     };
 
     Case();
-    Case(std::string const & name, Type type, sf::Vector2f const & pos, sf::Vector2f const & size);
+    Case(std::wstring const & name, Type type, sf::Vector2f const & pos, sf::Vector2f const & size);
     ~Case();
 
     Type get_type() const;
+    virtual void update(sf::Window& window);
 
-private:
+protected:
     sf::RectangleShape  _rect;
     sf::Font            _font;
     sf::Text            _country;
     Type                _type;
-    std::string         _name;
+    std::wstring        _name;
+
+    static bool         left_click_pressed;
 
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };
