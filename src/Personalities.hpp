@@ -12,6 +12,10 @@ private:
 	std::array<std::string, 3> _names;	// Nom des personnalités : Useless ?
 	std::array<int, 3> _cost;			// Cout d'achat de chaque personnalité
 public:
+	static constexpr short ARMEN = 1;
+	static constexpr short GUITTON = 1;
+	static constexpr short SCIFY = 1;
+
 	Personalities();
 	short get_owner(short const & personality) const;	// Permet de savoir à qui appartient une personnalitée
 	int get_cost(short const & personality) const;		// Récupération du coût de rachat d'une personnalitée

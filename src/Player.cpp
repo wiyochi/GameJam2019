@@ -21,17 +21,47 @@ std::string const & Player::get_name() const
 }
 
 
-void Player::play(ushort dice_value, ushort & event, short & personalities)
+void Player::play(ushort dice_value, bool have_sciphy, ushort & event, short & personalities)
 {
 	std::getchar();
-	move(dice_value);
+
+	
+	move(dice_value, have_sciphy);
 	event = do_board_action();
 	personalities = do_personalities_action();
 }
 
-void Player::move(uint16_t dice_value)
+void Player::move(uint16_t dice_value, bool have_sciphy)
 {
 	std::cout << "\tJ'ai fait un " << dice_value << '.' << std::endl;
+
+	if (have_sciphy)
+	{
+		before3:
+		std::cout << "\tVous disposez du bonus siphy, vous pouvez modifiez de un le résultat du dé." << std::endl;
+		std::cout << "\t\t1) Garder le résultat" << std::endl;
+		std::cout << "\t\t2) Augmenter le résultat" << std::endl;
+		std::cout << "\t\t3) Diminuer le résultat" << std::endl;
+
+		int choice;
+
+		switch (choice)
+		{
+			case 1:
+				break;
+			case 2:
+				std::cout << "\tVous avez décidé d'augmenter de 1." << std::endl;
+				dice_value++;
+				break;
+			case 3:
+				std::cout << "\tVous avez décidé de diminuer de 1." << std::endl;
+				dice_value--;
+				break;
+			default:
+				goto before3;
+		}
+	}
+
 	std::cout << "\tJ'avance de la case " << _pos << " à la case ";
 	_pos += dice_value;// Avance du pion
 	_pos %= nb_cases; 
