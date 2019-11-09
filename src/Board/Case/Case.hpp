@@ -5,7 +5,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
-constexpr char FONT_NODE_PATH[] = "resources/fonts/Roboto-Thin.ttf";
+extern const char FONT_PATH[];
 
 
 class Case : public sf::Drawable

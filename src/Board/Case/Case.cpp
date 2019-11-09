@@ -1,5 +1,7 @@
 #include "Case.hpp"
 
+const char FONT_PATH[] = "resources/fonts/Roboto-Thin.ttf";
+
 bool Case::left_click_pressed = false;
 
 Case::Case()
@@ -41,7 +43,7 @@ Case::Case(std::wstring const & name, Type type, sf::Vector2f const & pos, sf::V
     }
     _rect.setFillColor(c);
 
-    if (_font.loadFromFile(FONT_NODE_PATH))
+    if (_font.loadFromFile(FONT_PATH))
 	{
 		_country.setFont(_font);
 		_country.setFillColor(sf::Color::White);
