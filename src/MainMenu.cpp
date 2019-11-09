@@ -4,18 +4,18 @@ MainMenu::MainMenu()
 {
 }
 
-void MainMenu::draw(sf::RenderTarget& target, sf::RenderStates states) const
+void MainMenu::draw(sf::RenderTarget&, sf::RenderStates) const
 {
 	
 }
 
 
-void MainMenu::update(sf::Window& window)
+void MainMenu::update(sf::Window&)
 {
 }
 
 
 int MainMenu::get_menu_code() const
 {
-
+	return 0;
 }

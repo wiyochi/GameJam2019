@@ -56,6 +56,9 @@ int main()
                 break;
             case MAIN_MENU:
                 main_menu.update(window);
+                break;
+            case HELP_MENU:
+                break;
         }
     }
 

@@ -50,7 +50,7 @@ void Game::turn()
 	}
 }
 
-void Game::do_events(ushort const & player, ushort const & event)
+void Game::do_events(ushort const &, ushort const &)
 {
 
 }
