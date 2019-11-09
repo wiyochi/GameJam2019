@@ -1,21 +1,49 @@
 #include "MainMenu.hpp"
 
-MainMenu::MainMenu()
+MainMenu::MainMenu():
+	_menu_code(0)
 {
+	_start_button = new Button(L"Nouvelle partie", sf::Vector2f(200, 100), sf::Vector2f(400, 100));
+	_help_button = new Button(L"Aide", sf::Vector2f(200, 300), sf::Vector2f(400, 100));
+	_quit_button = new Button(L"Quitter", sf::Vector2f(200, 500), sf::Vector2f(400, 100));
 }
 
-void MainMenu::draw(sf::RenderTarget&, sf::RenderStates) const
+MainMenu::~MainMenu()
 {
+	delete _start_button;
+	delete _help_button;
+	delete _quit_button;
+}
+
+void MainMenu::draw(sf::RenderTarget& target, sf::RenderStates states) const
+{
+	target.draw(*_start_button, states);	
+	target.draw(*_help_button, states);	
+	target.draw(*_quit_button, states);	
+}
+
+
+void MainMenu::update(sf::Window& window)
+{
+	_start_button->update(window);
+	_help_button->update(window);
+	_quit_button->update(window);
+
+	if (_help_button->is_clicked())
+		_menu_code = 2;
+	else if (_start_button->is_clicked())
+		_menu_code = 1;
+	else if (_quit_button->is_clicked())
+		_menu_code = 3;
 	
+	std::wcout << _menu_code << std::endl;
 }
 
 
-void MainMenu::update(sf::Window&)
+int MainMenu::get_menu_code()
 {
-}
-
-
-int MainMenu::get_menu_code() const
-{
-	return 0;
+	int code = _menu_code;
+	if (_menu_code != 0)
+		_menu_code = 0;
+	return code;
 }
