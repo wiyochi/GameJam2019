@@ -1,15 +1,17 @@
 #include "Case.hpp"
 
+bool Case::left_click_pressed = false;
+
 Case::Case()
 {
 }
 
-Case::Case(std::string const & name, Type type, sf::Vector2f const & pos, sf::Vector2f const & size) :
-    _rect(size),
+Case::Case(std::wstring const & name, Type type, sf::Vector2f const & pos, sf::Vector2f const & size) :
+    _rect(sf::Vector2f(size.x - 2, size.y - 2)),
     _type(type),
     _name(name)
 {
-    _rect.setPosition(pos);
+    _rect.setPosition(sf::Vector2f(pos.x + 1, pos.y + 1));
     _rect.setOutlineThickness(1);
     _rect.setOutlineColor(sf::Color::White);
     sf::Color c = sf::Color::White;
@@ -28,10 +30,13 @@ Case::Case(std::string const & name, Type type, sf::Vector2f const & pos, sf::Ve
         c = sf::Color::Yellow;
         break;
     case Case::Type::Chance:
-        c = sf::Color::White;
+        c = sf::Color(40, 40, 40);
         break;
     case Case::Type::Taxes:
-        c = sf::Color::White;
+        c = sf::Color(40, 40, 40);
+        break;
+    case Case::Type::USA:
+        c = sf::Color(40, 40, 40);
         break;
     }
     _rect.setFillColor(c);
@@ -56,8 +61,21 @@ Case::Type Case::get_type() const
     return _type;
 }
 
+void Case::update(sf::Window& window)
+{
+    sf::Vector2f mouse_pos(sf::Mouse::getPosition(window));
+    if (_rect.getGlobalBounds().contains(mouse_pos) && sf::Mouse::isButtonPressed(sf::Mouse::Left) && !left_click_pressed)
+    {
+        left_click_pressed = true;
+    }
+    else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left) && left_click_pressed)
+    {
+        left_click_pressed = false;
+    }
+}
+
 void Case::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    target.draw(_rect);
-    target.draw(_country);
+    target.draw(_rect, states);
+    target.draw(_country, states);
 }
