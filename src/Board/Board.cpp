@@ -48,15 +48,15 @@ void Board::update(sf::Window& window)
     std::for_each(_cases.begin(), _cases.end(), [&](Case* c){ c->update(window); });
 
     // Check for new view
-    std::for_each(_cases.begin(), _cases.end(), [&](Case* c)
+    for(auto c = _cases.begin(); c != _cases.end(); c++)
     {
-        if(c->get_viewed())
+        if((*c)->get_viewed())
         {
-            c->set_viewed(false);
-            _case_viewed = c;
-            std::wcout << L"Nouveau viewed: " << _case_viewed->get_name() << std::endl;
+            (*c)->set_viewed(false);
+            _view->set_case(*c);
+            std::wcout << L"Nouveau viewed: " << _view->get_case()->get_name() << std::endl;
         }
-    });
+    }
 }
 
 void Board::draw(sf::RenderTarget& target, sf::RenderStates states) const

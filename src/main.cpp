@@ -14,7 +14,7 @@ enum STATES {
 
 int main()
 {
-    STATES state = MAIN_MENU;
+    STATES state = GAME;
     
     Game g(20, 2);
    // g.run();
@@ -43,24 +43,17 @@ int main()
             case GAME:
                 // Updates
                 b->update(window);
+                test_button->update(window);
 
-        // Updates
-        b->update(window);
-        test_button->update(window);
+                if (test_button->is_clicked())
+                    std::wcout << "TEST" << std::endl;
 
-        if (test_button->is_clicked())
-            std::wcout << "TEST" << std::endl;
-
-        // Draws
-        window.clear();
-        window.draw(*b);
-        window.draw(*test_button);
-        window.display();
                 // Draws
                 window.clear();
                 window.draw(*b);
+                window.draw(*test_button);
                 window.display();
-                  break;
+                break;
             case MAIN_MENU:
                 main_menu.update(window);
         }

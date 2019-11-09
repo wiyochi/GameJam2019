@@ -13,6 +13,16 @@ View::~View()
 {
 }
 
+void View::set_case(Case* c)
+{
+    _case = c;
+}
+
+Case* View::get_case()
+{
+    return _case;
+}
+
 void View::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     target.draw(_rect, states);

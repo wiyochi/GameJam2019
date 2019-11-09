@@ -49,7 +49,6 @@ public:
 private:
     sf::RectangleShape          _rect;
     std::array<Case*, NB_CASES> _cases;
-    Case*                       _case_viewed;
     View*                       _view;
     
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
