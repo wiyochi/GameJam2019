@@ -12,7 +12,7 @@ Button::Button(std::wstring const & name, sf::Vector2f const & pos, sf::Vector2f
     _rect_disable(disable_color)
 {
     _rect.setPosition(pos);
-    _rect.setOutlineThickness(2);
+   // _rect.setOutlineThickness(2);
     sf::Color outline(_rect_color);
     outline.a = 150;
     _rect.setOutlineColor(outline);
