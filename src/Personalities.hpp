@@ -19,6 +19,7 @@ public:
 	Personalities();
 	short get_owner(short const & personality) const;	// Permet de savoir à qui appartient une personnalitée
 	int get_cost(short const & personality) const;		// Récupération du coût de rachat d'une personnalitée
+	void set_owner(short const & personality, short p_id);
 };
 
 #endif

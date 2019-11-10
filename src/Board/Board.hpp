@@ -9,6 +9,11 @@
 #include "Case/Taxes.hpp"
 #include "Case/Chance.hpp"
 #include "View.hpp"
+#include "../UI/Button.hpp"
+
+#include "../Game.hpp"
+
+#include <sstream>
 
 constexpr unsigned int NB_CASES = 20;
 constexpr std::wstring_view  CASES_NAMES[NB_CASES] = {
@@ -59,11 +64,29 @@ public:
     ~Board();
 
     void update(sf::Window& window);
+    int & get_code();
 
 private:
+    Game _g;
+    Button * _dice_button;
+	Button * _dice_p_button;
+	Button * _dice_m_button;
+	Button * _dice_e_button;
+	Button * _buy_cfy_button;
+	Button * _buy_guitton_button;
+	Button * _buy_armen_button;
+	Button * _buy_skip_button;
+	Button * _event_1_button;
+	Button * _event_2_button;
+	Button * _event_spe_button;
+	Button * _event_skip_button;
+    sf::Text _text_code;
+
     sf::RectangleShape          _rect;
     std::array<Case*, NB_CASES> _cases;
     View*                       _view;
+
+    int _code;
     
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };

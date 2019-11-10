@@ -1,6 +1,7 @@
 #include "Game.hpp"
 
 Game::Game(uint16_t max_turn, ushort nb_players):
+	_state(START_TURN),
 	_max_turn(max_turn)
 {
 	for (ushort i = 0; i < nb_players; i++)
@@ -13,6 +14,49 @@ Game::Game(uint16_t max_turn, ushort nb_players):
 	//std::getchar();
 	
 }
+
+void Game::dice()
+{
+	_dice_value = rand() % MAX_DICE;
+	if(_personalities.get_owner(Personalities::SCIFY) == _nb_turn % 2)
+		_state = WAIT_CFY;
+	else 
+		_state = WAIT_EVENTS;
+}
+
+void Game::cfy(int c)
+{
+	if (c == 1)
+		_dice_value++;
+	else if (c == 2)
+		_dice_value--;
+		
+	_state = WAIT_EVENTS;
+}
+
+void Game::buy(short person)
+{
+	if (_personalities.get_cost(person) <= _players[_nb_turn % 2].get_money())
+	{
+		_personalities.set_owner(person, _nb_turn % 2);
+		_players[_nb_turn % 2].set_money(_players[_nb_turn % 2].get_money() - _personalities.get_cost(person));
+	}
+}
+
+void Game::events(ushort event)
+{
+	// TODO EVENTS
+}
+
+void Game::end()
+{
+	if (_nb_turn % 2 == 1) // Les deux joueurs ont joués
+		end_of_turn();
+	_state = START_TURN;
+	_nb_turn++;
+}
+
+
 
 void Game::run()
 {
@@ -42,18 +86,13 @@ void Game::turn()
 	for (ushort i = 0; i < _players.size(); i++)
 	{
 		std::cout << "\tAu tour du joueur : " << _players[i].get_name() << " (" << i << ')' << std::endl;
-		ushort dice_value = rand() % MAX_DICE;
+		_dice_value = rand() % MAX_DICE;
 		ushort event;
 		short personalities;
-		_players[i].play(dice_value, _personalities.get_owner(Personalities::SCIFY) == i, event, personalities);
+		_players[i].play(_dice_value, _personalities.get_owner(Personalities::SCIFY) == i, event, personalities);
 		do_events(i, event);
 		do_personalities(i, personalities);
 	}
-}
-
-void Game::do_events(ushort const &, ushort const &)
-{
-
 }
 
 void Game::do_personalities(ushort const & player, short const & personality)
@@ -61,3 +100,5 @@ void Game::do_personalities(ushort const & player, short const & personality)
 	if (_personalities.get_cost(personality) <= _players[player].get_money())
 		_players[player].set_money(_personalities.get_cost(personality));
 }
+
+void Game::do_events(ushort const &, ushort const &){}

@@ -15,24 +15,14 @@ enum STATES {
 
 int main()
 {
-    STATES state = GAME;
-    
-    Game g(20, 2);
-   // g.run();
+    STATES state = MAIN_MENU;
 
-
-
-
-
-    sf::RenderWindow window(sf::VideoMode(1000, 1000), "Monop mais pas monop");
-
+    sf::RenderWindow window(sf::VideoMode(1200, 800), "Monop mais pas monop");
     sf::View v;
     
     Board* b = new Board(sf::Vector2f(50.f, 50.f));
     MainMenu* main_menu = new MainMenu();
     HelpMenu* help_menu = new HelpMenu();
-
-    Button* test_button = new Button(L"Test Bouton", sf::Vector2f(0.f, 0.f), sf::Vector2f(200.f, 50.f));
 
     while (window.isOpen())
     {
@@ -59,14 +49,9 @@ int main()
             case GAME:
                 // Updates
                 b->update(window);
-                test_button->update(window);
-
-                if (test_button->is_clicked())
-                    std::wcout << "TEST" << std::endl;
-
+                
                 // Draws
                 window.draw(*b);
-                window.draw(*test_button);
                 break;
             case MAIN_MENU:
                 main_menu->update(window);
