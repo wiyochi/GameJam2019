@@ -13,8 +13,9 @@ Board::Board(sf::Vector2f pos):
   	_event_1_button(new Button(L"Organiser un meeting", sf::Vector2f(1000, 100), sf::Vector2f(200, 40))),
 	_event_2_button(new Button(L"Organiser une conférence", sf::Vector2f(1000, 150), sf::Vector2f(200, 40))),
 	_event_spe_button(new Button(L"Organiser l'évènement spécial", sf::Vector2f(1000, 200), sf::Vector2f(200, 40))),
-     _event_skip_button(new Button(L"Skip évènement", sf::Vector2f(1000, 50), sf::Vector2f(200, 40))),
-	 _code(0)
+    _event_skip_button(new Button(L"Skip évènement", sf::Vector2f(1000, 50), sf::Vector2f(200, 40))),
+    _tout(sf::Vector2f(1920, 1080)),
+    _code(0)
 {
     /*
     _dice_p_button->set_active(false);
@@ -85,6 +86,10 @@ Board::Board(sf::Vector2f pos):
     _pion[1].setRadius(10);
     _pion[1].setFillColor(sf::Color::Blue);
     _pion[1].setPosition(_cases[0]->get_position());
+
+
+    _img.loadFromFile("resources/textures/book.png");
+    _tout.setTexture(&_img);
 
 }
 
@@ -240,6 +245,7 @@ int & Board::get_code()
 
 void Board::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
+    target.draw(_tout, states);
     target.draw(_rect, states);
     std::for_each(_cases.begin(), _cases.end(), [&](Case* c){ target.draw(*c, states); });
     target.draw(*_view, states);

@@ -17,13 +17,12 @@ int main()
 {
     STATES state = MAIN_MENU;
 
-    sf::RenderWindow window(sf::VideoMode(1200, 1000), "Monop mais pas monop");
+    sf::RenderWindow window(sf::VideoMode(1920, 1080), "Monop mais pas monop", sf::Style::Fullscreen);
     sf::View v;
     
-    Board* b = new Board(sf::Vector2f(0.f, 0.f));
+    Board* b = new Board(sf::Vector2f(100, 150));
     MainMenu* main_menu = new MainMenu();
     HelpMenu* help_menu = new HelpMenu();
-
     while (window.isOpen())
     {
         sf::Event event;
