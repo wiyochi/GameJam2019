@@ -132,3 +132,9 @@ ushort Player::get_pos() const
 {
 	return _pos;
 }
+
+void Player::move(ushort dice)
+{
+	_pos += dice;
+	_pos %= 20;
+}
