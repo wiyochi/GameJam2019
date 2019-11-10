@@ -1,6 +1,7 @@
 #include "Game.hpp"
 
-Game::Game(uint16_t max_turn, ushort nb_players):
+Game::Game(uint16_t max_turn, short nb_players):
+	_personalities(),
 	_state(START_TURN),
 	_max_turn(max_turn),
 	gen(rd()),
@@ -9,14 +10,17 @@ Game::Game(uint16_t max_turn, ushort nb_players):
 	dis_conference(80000, 100000),
 	dis_special(300000, 350000)
 {
-	for (ushort i = 0; i < nb_players; i++)
+	_personalities.set_owner(Personalities::ARMEN, -1);
+	_personalities.set_owner(Personalities::GUITTON, -1);
+	_personalities.set_owner(Personalities::SCIFY, -1);
+
+	for (short i = 0; i < nb_players; i++)
 	{
 		std::ostringstream oss;
 		oss << "Player " << i + 1;
 		std::string name = oss.str();
 		_players.push_back(Player(name));
 	}
-	//std::getchar();
 	
 }
 
@@ -28,7 +32,7 @@ void Game::dice()
 	else 
 	{
 		_state = WAIT_EVENTS;
-		_players[_nb_turn % 2].move(_dice_value);
+		_players[_nb_turn % 2].move_m(_dice_value);
 	}
 }
 
@@ -40,7 +44,7 @@ void Game::cfy(int c)
 		_dice_value--;
 
 	_state = WAIT_EVENTS;
-	_players[_nb_turn % 2].move(_dice_value);
+	_players[_nb_turn % 2].move_m(_dice_value);
 }
 
 void Game::buy(short person)
@@ -52,7 +56,7 @@ void Game::buy(short person)
 	}
 }
 
-void Game::events(ushort event)
+void Game::events(short event)
 {
 	constexpr int costs[] = {1000, 2000, 5000};
 
@@ -142,7 +146,7 @@ void Game::turn()
 	{
 		std::cout << "\tAu tour du joueur : " << _players[i].get_name() << " (" << i << ')' << std::endl;
 		_dice_value = rand() % MAX_DICE;
-		ushort event;
+		short event;
 		short personalities;
 		_players[i].play(_dice_value, _personalities.get_owner(Personalities::SCIFY) == i, event, personalities);
 		do_events(i, event);
@@ -155,10 +159,10 @@ Player& Game::get_current_player()
 	return _players[_nb_turn % _players.size()];
 }
 
-void Game::do_personalities(ushort const & player, short const & personality)
+void Game::do_personalities(short const & player, short const & personality)
 {
 	if (_personalities.get_cost(personality) <= _players[player].get_money())
 		_players[player].set_money(_personalities.get_cost(personality));
 }
 
-void Game::do_events(ushort const &, ushort const &){}
+void Game::do_events(short const &, short const &){}

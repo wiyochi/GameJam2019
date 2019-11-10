@@ -85,7 +85,6 @@ Board::Board(sf::Vector2f pos):
 
     _img.loadFromFile("resources/textures/book.png");
     _tout.setTexture(&_img);
-
 }
 
 Board::~Board()
@@ -107,7 +106,7 @@ void Board::update(sf::Window& window)
     oss << "Cfy est corrompu par " << (_g._personalities.get_owner(Personalities::SCIFY) != -1 ? _g._players[_g._personalities.get_owner(Personalities::SCIFY)].get_name() : "Personne") << std::endl;
     oss << "Guitton est corrompu par " << (_g._personalities.get_owner(Personalities::GUITTON) != -1 ? _g._players[_g._personalities.get_owner(Personalities::GUITTON)].get_name() : "Personne") << std::endl;
     oss << "Armen est corrompu par " << (_g._personalities.get_owner(Personalities::ARMEN) != -1 ? _g._players[_g._personalities.get_owner(Personalities::ARMEN)].get_name() : "Personne") << std::endl;
-    
+
     _corrupted.setString(oss.str());
     switch(_g._state)
     {
@@ -228,12 +227,6 @@ void Board::update(sf::Window& window)
         _g.events(3);
     else if(_event_skip_button->is_clicked())
         _g._state = Game::WAIT_PERSO;
-
-    oss.clear();
-    oss << "Personnalities : \n" << _g._personalities.get_owner(0)
-    << "\n - " << _g._personalities.get_owner(0)
-    << "\n - " << _g._personalities.get_owner(0);
-    _text_code.setString(oss.str());
 
     _text_turn.setString(_g.get_current_player().get_name());
 

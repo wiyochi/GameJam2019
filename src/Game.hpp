@@ -25,14 +25,14 @@ public:
 	Personalities _personalities;
 	int _nb_turn;					// Nombre de tour actuellement joué
 
-	Game(uint16_t max_turn, ushort nb_joueur);
+	Game(uint16_t max_turn, short nb_joueur);
 	void end_of_turn();
 	void turn(); 					// Execute toute la partie (tous les tours)
 	void run();						// Fais jouer chaque joueur à son tour
 	void dice();
 	void cfy(int i);
 	void buy(short person);
-	void events(ushort event);
+	void events(short event);
 	void end();
 	Player& get_current_player();
 	std::array<CaseLogic, 20> _cases_logic;
@@ -40,11 +40,11 @@ public:
 
 
 private:
-	static constexpr ushort MAX_DICE = 8;
+	static constexpr short MAX_DICE = 8;
 	static constexpr int MONEY = 30000;
 	// Ajouter plateau
 	const uint16_t _max_turn; 		// Nombre total de tour dans la partie
-	ushort _dice_value;
+	short _dice_value;
 	std::random_device rd;
 	std::mt19937 gen;
 	std::uniform_int_distribution<int> dis_dice;
@@ -52,8 +52,8 @@ private:
 	std::uniform_int_distribution<int> dis_conference;
 	std::uniform_int_distribution<int> dis_special;
 
-	void do_events(ushort const & player, ushort const & event);
-	void do_personalities(ushort const & player, short const & personalities);
+	void do_events(short const & player, short const & event);
+	void do_personalities(short const & player, short const & personalities);
 };
 
 #endif

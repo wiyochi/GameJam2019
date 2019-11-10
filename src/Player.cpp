@@ -21,7 +21,7 @@ std::string const & Player::get_name() const
 }
 
 
-void Player::play(ushort dice_value, bool have_sciphy, ushort & event, short & personalities)
+void Player::play(short dice_value, bool have_sciphy, short & event, short & personalities)
 {
 	std::getchar();
 
@@ -69,7 +69,7 @@ void Player::move(uint16_t dice_value, bool have_sciphy)
 	std::cout << _pos << std::endl;
 }
 
-ushort Player::do_board_action()
+short Player::do_board_action()
 {
 	before: // ATTENTION GOTO LABEL
 	std::cout << "\tQuel évènement organisé ? :" << std::endl;
@@ -128,12 +128,12 @@ short Player::do_personalities_action()
 	return choice;
 }
 
-ushort Player::get_pos() const
+short Player::get_pos() const
 {
 	return _pos;
 }
 
-void Player::move(ushort dice)
+void Player::move_m(short dice)
 {
 	_pos += dice;
 	_pos %= 20;
