@@ -1,8 +1,8 @@
 #include "Game.hpp"
 
 Game::Game(uint16_t max_turn, short nb_players):
-	_personalities(),
 	_state(START_TURN),
+	_personalities(),
 	_max_turn(max_turn),
 	gen(rd()),
 	dis_dice(1, MAX_DICE),
@@ -167,7 +167,7 @@ void Game::do_personalities(short const & player, short const & personality)
 		_players[player].set_money(_personalities.get_cost(personality));
 }
 
-void Game::do_events(ushort const &, ushort const &){}
+void Game::do_events(short const &, short const &){}
 
 ushort Game::get_dice() const
 {

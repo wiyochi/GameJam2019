@@ -39,14 +39,14 @@ Board::Board(sf::Vector2f pos):
         _dice_value.setPosition(sf::Vector2f(1100, 200));
 
 	}
-    _rect.setPosition(pos);
-    _rect.setOutlineThickness(1);
-    _rect.setOutlineColor(sf::Color::White);
-    _rect.setFillColor(sf::Color::Transparent);
+    _rect.setPosition(sf::Vector2f(pos.x - 10, pos.y - 10));
+    _rect.setOutlineThickness(3);
+    _rect.setOutlineColor(sf::Color::Black);
+    _rect.setFillColor(sf::Color(0, 0, 0, 70));
 
     sf::Vector2f cases_size(100.f, 150.f);
 
-    _rect.setSize(sf::Vector2f(cases_size.x * (NB_CASES / 4) + 2 * cases_size.y, cases_size.x * (NB_CASES / 4) + 2 * cases_size.y));
+    _rect.setSize(sf::Vector2f(cases_size.x * (NB_CASES / 4) + 2 * cases_size.y + 20, cases_size.x * (NB_CASES / 4) + 2 * cases_size.y + 20));
 
     unsigned int div = NB_CASES / 4;
     // Cases creation
