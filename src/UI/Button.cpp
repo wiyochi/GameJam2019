@@ -21,7 +21,7 @@ Button::Button(std::wstring const & name, sf::Vector2f const & pos, sf::Vector2f
     if (_font.loadFromFile(FONT_PATH))
 	{
 		_text.setFont(_font);
-		_text.setFillColor(sf::Color::Black);
+		_text.setFillColor(sf::Color::White);
 		_text.setString(_name);
 		_text.setStyle(sf::Text::Bold);
 		_text.setCharacterSize(15);
@@ -29,6 +29,8 @@ Button::Button(std::wstring const & name, sf::Vector2f const & pos, sf::Vector2f
         sf::Rect size_text = _text.getGlobalBounds();
         _text.setPosition(sf::Vector2f(pos.x + size.x / 2 - size_text.width / 2, pos.y + size.y / 2 - size_text.height / 2));
 	}
+    _texture.loadFromFile("resources/textures/frame.png");
+    _rect.setTexture(&_texture);
 }
 
 Button::~Button()

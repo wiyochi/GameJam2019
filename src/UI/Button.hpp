@@ -22,6 +22,7 @@ private:
     sf::Font            _font;
     sf::Text            _text;
     std::wstring        _name;
+    sf::Texture _texture;
     bool _is_active;
     bool                _clicked;
 
