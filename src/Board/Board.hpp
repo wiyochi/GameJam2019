@@ -82,6 +82,7 @@ private:
 	Button * _event_2_button;
 	Button * _event_spe_button;
 	Button * _event_skip_button;
+    sf::Text _corrupted;
     sf::Text _text_code;
 
     sf::Font                    _font;
