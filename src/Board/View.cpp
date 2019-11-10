@@ -13,13 +13,13 @@ View::View(sf::Vector2f const & pos, sf::Vector2f const & size) :
     if (_font.loadFromFile(FONT_PATH))
 	{
 		_text_title.setFont(_font);
-		_text_title.setFillColor(sf::Color::White);
+		_text_title.setFillColor(sf::Color::Black);
 		_text_title.setStyle(sf::Text::Bold);
 		_text_title.setCharacterSize(15);
         _text_title.setPosition(pos);
 
         _text_center.setFont(_font);
-		_text_center.setFillColor(sf::Color::White);
+		_text_center.setFillColor(sf::Color::Black);
 		_text_center.setStyle(sf::Text::Bold);
 		_text_center.setCharacterSize(15);
         _text_center.setPosition(pos);
@@ -32,7 +32,7 @@ View::~View()
 
 void View::set_case(Case* c)
 {
-    std::ostringstream oss;
+    std::wstringstream oss;
     _case = c;
 
     _text_title.setString(c->get_name());
@@ -50,9 +50,9 @@ void View::set_case(Case* c)
     default:
         if (Pays * p = dynamic_cast<Pays*>(_case))
         {
-            oss << "Adhérent à Terre Plate: ";
+            oss << L"Adhérent à Terre Plate: ";
             oss << p->_case_logic->get_member_flat() << std::endl;
-            oss << "Adhérent à Terre Ronde: ";
+            oss << L"Adhérent à Terre Ronde: ";
             oss << p->_case_logic->get_member_glob() << std::endl;
             _text_center.setString(oss.str());
         }
