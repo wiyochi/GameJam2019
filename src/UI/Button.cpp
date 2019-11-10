@@ -24,7 +24,7 @@ Button::Button(std::wstring const & name, sf::Vector2f const & pos, sf::Vector2f
 		_text.setFillColor(sf::Color::White);
 		_text.setString(_name);
 		_text.setStyle(sf::Text::Bold);
-		_text.setCharacterSize(15);
+		_text.setCharacterSize(25);
 
         sf::Rect size_text = _text.getGlobalBounds();
         _text.setPosition(sf::Vector2f(pos.x + size.x / 2 - size_text.width / 2, pos.y + size.y / 2 - size_text.height / 2));

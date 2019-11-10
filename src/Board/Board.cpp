@@ -2,18 +2,18 @@
 
 Board::Board(sf::Vector2f pos):
     _g(Game(10, 2)),
-    _dice_button(new Button(L"Lancer les dés", sf::Vector2f(1300, 150), sf::Vector2f(300, 40))),
-	_dice_p_button(new Button(L"Augmenter", sf::Vector2f(1300, 150), sf::Vector2f(300, 40))),
-	_dice_m_button(new Button(L"Réduire", sf::Vector2f(1300, 200), sf::Vector2f(300, 40))),
-	_dice_e_button(new Button(L"Conserver", sf::Vector2f(1300, 250), sf::Vector2f(300, 40))),
-	_buy_cfy_button(new Button(L"Corrompre Cfy", sf::Vector2f(1300, 200), sf::Vector2f(300, 40))),
-	_buy_guitton_button(new Button(L"Corrompre Guitton", sf::Vector2f(1300, 300), sf::Vector2f(300, 40))),
-	_buy_armen_button(new Button(L"Corrompre Armen", sf::Vector2f(1300, 250), sf::Vector2f(300, 40))),
-	_buy_skip_button(new Button(L"Skip Perso", sf::Vector2f(1300, 150), sf::Vector2f(300, 40))),
-  	_event_1_button(new Button(L"Organiser un meeting", sf::Vector2f(1300, 200), sf::Vector2f(300, 40))),
-	_event_2_button(new Button(L"Organiser une conférence", sf::Vector2f(1300, 250), sf::Vector2f(300, 40))),
-	_event_spe_button(new Button(L"Organiser l'évènement spécial", sf::Vector2f(1300, 300), sf::Vector2f(300, 40))),
-    _event_skip_button(new Button(L"Skip évènement", sf::Vector2f(1300, 150), sf::Vector2f(300, 40))),
+    _dice_button(new Button(L"Lancer les dés", sf::Vector2f(1200, 350), sf::Vector2f(400, 40))),
+	_dice_p_button(new Button(L"Augmenter", sf::Vector2f(1200, 350), sf::Vector2f(400, 40))),
+	_dice_m_button(new Button(L"Réduire", sf::Vector2f(1200, 400), sf::Vector2f(400, 40))),
+	_dice_e_button(new Button(L"Conserver", sf::Vector2f(1200, 450), sf::Vector2f(400, 40))),
+	_buy_cfy_button(new Button(L"Corrompre Cfy", sf::Vector2f(1200, 400), sf::Vector2f(400, 40))),
+	_buy_guitton_button(new Button(L"Corrompre Guitton", sf::Vector2f(1200, 500), sf::Vector2f(400, 40))),
+	_buy_armen_button(new Button(L"Corrompre Armen", sf::Vector2f(1200, 450), sf::Vector2f(400, 40))),
+	_buy_skip_button(new Button(L"Skip Perso", sf::Vector2f(1200, 350), sf::Vector2f(400, 40))),
+  	_event_1_button(new Button(L"Organiser un meeting", sf::Vector2f(1200, 400), sf::Vector2f(400, 40))),
+	_event_2_button(new Button(L"Organiser une conférence", sf::Vector2f(1200, 450), sf::Vector2f(400, 40))),
+	_event_spe_button(new Button(L"Organiser l'évènement spécial", sf::Vector2f(1200, 500), sf::Vector2f(400, 40))),
+    _event_skip_button(new Button(L"Skip évènement", sf::Vector2f(1200, 350), sf::Vector2f(400, 40))),
     _tout(sf::Vector2f(1920, 1080)),
     _code(0)
 {
@@ -22,21 +22,30 @@ Board::Board(sf::Vector2f pos):
 		_text_turn.setFont(_font);
 		_text_turn.setFillColor(sf::Color::Black);
 		_text_turn.setStyle(sf::Text::Bold);
-		_text_turn.setCharacterSize(15);
-        _text_turn.setPosition(sf::Vector2f(1100, 100));
+		_text_turn.setCharacterSize(27);
+        _text_turn.setPosition(sf::Vector2f(1100, 150));
 
         _corrupted.setFont(_font);
         _corrupted.setFillColor(sf::Color::Black);
-        _corrupted.setCharacterSize(20);
+		_corrupted.setStyle(sf::Text::Bold);
+        _corrupted.setCharacterSize(27);
         _corrupted.setString("Thunes");
-        _corrupted.setPosition(sf::Vector2f(1350, 600));
+        _corrupted.setPosition(sf::Vector2f(1175, 600));
 
         
         _dice_value.setFont(_font);
         _dice_value.setFillColor(sf::Color::Black);
-        _dice_value.setCharacterSize(20);
+		_dice_value.setStyle(sf::Text::Bold);
+        _dice_value.setCharacterSize(27);
         _dice_value.setString(L"Dé");
-        _dice_value.setPosition(sf::Vector2f(1100, 200));
+        _dice_value.setPosition(sf::Vector2f(1100, 250));
+
+
+		_text_money.setFont(_font);
+		_text_money.setFillColor(sf::Color::Black);
+		_text_money.setStyle(sf::Text::Bold);
+		_text_money.setCharacterSize(27);
+        _text_money.setPosition(sf::Vector2f(1100, 200));
 
 	}
     _rect.setPosition(sf::Vector2f(pos.x - 10, pos.y - 10));
@@ -80,9 +89,6 @@ Board::Board(sf::Vector2f pos):
     sf::Font * font = new sf::Font();
     (*font).loadFromFile(FONT_NOD_PATH);
 
-    _text_code = sf::Text("Code", *font, 20);
-    _text_code.setPosition(700, 100);
-
     _img.loadFromFile("resources/textures/book.png");
     _tout.setTexture(&_img);
 }
@@ -103,9 +109,9 @@ void Board::update(sf::Window& window)
 {
     // Code d'updates
     std::ostringstream oss;
-    oss << "Cfy est corrompu par " << (_g._personalities.get_owner(Personalities::SCIFY) != -1 ? _g._players[_g._personalities.get_owner(Personalities::SCIFY)].get_name() : "Personne") << std::endl;
-    oss << "Guitton est corrompu par " << (_g._personalities.get_owner(Personalities::GUITTON) != -1 ? _g._players[_g._personalities.get_owner(Personalities::GUITTON)].get_name() : "Personne") << std::endl;
-    oss << "Armen est corrompu par " << (_g._personalities.get_owner(Personalities::ARMEN) != -1 ? _g._players[_g._personalities.get_owner(Personalities::ARMEN)].get_name() : "Personne") << std::endl;
+    oss << "Cfy        est corrompu par " << (_g._personalities.get_owner(Personalities::SCIFY) != -1 ? _g._players[_g._personalities.get_owner(Personalities::SCIFY)].get_name() : "Personne") << std::endl;
+    oss << "Guitton  est corrompu par " << (_g._personalities.get_owner(Personalities::GUITTON) != -1 ? _g._players[_g._personalities.get_owner(Personalities::GUITTON)].get_name() : "Personne") << std::endl;
+    oss << "Armen   est corrompu par " << (_g._personalities.get_owner(Personalities::ARMEN) != -1 ? _g._players[_g._personalities.get_owner(Personalities::ARMEN)].get_name() : "Personne") << std::endl;
 
     _corrupted.setString(oss.str());
     switch(_g._state)
@@ -241,13 +247,18 @@ void Board::update(sf::Window& window)
         _cases[_g._players[0].get_pos()]->setOutlineColor(sf::Color::Magenta);
     }
     std::wstringstream wss;
-    wss << L"Valeur du dé :" << std::endl << "           " << _g.get_dice();
+    wss << L"Valeur du dé :" << "           " << _g.get_dice();
     _dice_value.setString(wss.str());
 
     oss.str("");
     oss.clear();
     oss << "Au tour des " << _g.get_current_player().get_name() << " :";
     _text_turn.setString(oss.str());
+
+    oss.str("");
+    oss.clear();
+    oss << "Dollarzz : " << _g.get_current_player().get_money();
+    _text_money.setString(oss.str());
 }
 
 int & Board::get_code()
@@ -278,6 +289,7 @@ void Board::draw(sf::RenderTarget& target, sf::RenderStates states) const
     target.draw(_text_turn, states);
 
     target.draw(_corrupted);
+    target.draw(_text_money);
 
     if(_g._state != Game::START_TURN)
         target.draw(_dice_value, states);

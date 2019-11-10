@@ -1,6 +1,6 @@
 #include "Case.hpp"
 
-const char FONT_PATH[] = "resources/fonts/Roboto-Thin.ttf";
+const char FONT_PATH[] = "resources/fonts/Pruistine Script.ttf";
 const char TEXTURE_PATH[] = "resources/textures/";
 
 bool Case::left_click_pressed = false;
@@ -62,7 +62,7 @@ Case::Case(std::wstring const & name, Type type, sf::Vector2f const & pos, sf::V
 		_country.setFillColor(sf::Color::Black);
 		_country.setString(_name);
 		_country.setStyle(sf::Text::Bold);
-		_country.setCharacterSize(15);
+		_country.setCharacterSize(30);
 	}
 
     sf::Rect text_size(_country.getGlobalBounds());

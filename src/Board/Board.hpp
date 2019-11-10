@@ -71,9 +71,10 @@ private:
     sf::Text _corrupted;
     sf::Text _text_code;
     sf::Text _dice_value;
+    sf::Text _text_money;
+    sf::Text _text_turn;
 
     sf::Font                    _font;
-    sf::Text                    _text_turn;
     sf::RectangleShape          _rect;
     std::array<Case*, NB_CASES> _cases;
     View*                       _view;

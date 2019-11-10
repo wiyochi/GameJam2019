@@ -3,9 +3,9 @@
 MainMenu::MainMenu():
 	_menu_code(0)
 {
-	_start_button = new Button(L"Nouvelle partie", sf::Vector2f(200, 100), sf::Vector2f(400, 100));
-	_help_button = new Button(L"Aide", sf::Vector2f(200, 300), sf::Vector2f(400, 100));
-	_quit_button = new Button(L"Quitter", sf::Vector2f(200, 500), sf::Vector2f(400, 100));
+	_start_button = new Button(L"Nouvelle partie", sf::Vector2f(780, 250), sf::Vector2f(400, 100));
+	_help_button = new Button(L"Aide", sf::Vector2f(780, 450), sf::Vector2f(400, 100));
+	_quit_button = new Button(L"Quitter", sf::Vector2f(780, 650), sf::Vector2f(400, 100));
 }
 
 MainMenu::~MainMenu()

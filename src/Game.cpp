@@ -14,13 +14,6 @@ Game::Game(uint16_t max_turn, short nb_players):
 	_personalities.set_owner(Personalities::GUITTON, -1);
 	_personalities.set_owner(Personalities::SCIFY, -1);
 
-	for (short i = 0; i < nb_players; i++)
-	{
-		std::ostringstream oss;
-		oss << "Player " << i + 1;
-		std::string name = oss.str();
-		_players.push_back(Player(name));
-	}
 	_players.push_back(Player("Globistes"));
 	_players.push_back(Player("Platistes"));
 	//std::getchar();

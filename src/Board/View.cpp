@@ -7,21 +7,21 @@ View::View(sf::Vector2f const & pos, sf::Vector2f const & size) :
 {
     _rect.setPosition(pos);
     _rect.setOutlineThickness(1);
-    _rect.setOutlineColor(sf::Color::White);
-    _rect.setFillColor(sf::Color::Transparent);
+    _rect.setOutlineColor(sf::Color::Black);
+    _rect.setFillColor(sf::Color(0, 0, 0, 70));
 
     if (_font.loadFromFile(FONT_PATH))
 	{
 		_text_title.setFont(_font);
 		_text_title.setFillColor(sf::Color::Black);
 		_text_title.setStyle(sf::Text::Bold);
-		_text_title.setCharacterSize(15);
+		_text_title.setCharacterSize(40);
         _text_title.setPosition(pos);
 
         _text_center.setFont(_font);
 		_text_center.setFillColor(sf::Color::Black);
 		_text_center.setStyle(sf::Text::Bold);
-		_text_center.setCharacterSize(15);
+		_text_center.setCharacterSize(27);
         _text_center.setPosition(pos);
 	}
 }
