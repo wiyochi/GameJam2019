@@ -78,6 +78,10 @@ bool Button::is_clicked()
 
 void Button::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    target.draw(_rect, states);
-    target.draw(_text, states);
+    if (_is_active)
+    {
+        target.draw(_rect, states);
+        target.draw(_text, states);
+    }
+    
 }

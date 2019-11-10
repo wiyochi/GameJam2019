@@ -127,6 +127,11 @@ void Case::rotate(float angle)
     _country.rotate(angle);
 }
 
+sf::Vector2f Case::get_position() const
+{
+    return _rect.getPosition();
+}
+
 void Case::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     target.draw(_rect, states);

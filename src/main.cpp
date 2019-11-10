@@ -17,10 +17,10 @@ int main()
 {
     STATES state = MAIN_MENU;
 
-    sf::RenderWindow window(sf::VideoMode(1200, 800), "Monop mais pas monop");
+    sf::RenderWindow window(sf::VideoMode(1200, 1000), "Monop mais pas monop");
     sf::View v;
     
-    Board* b = new Board(sf::Vector2f(50.f, 50.f));
+    Board* b = new Board(sf::Vector2f(0.f, 0.f));
     MainMenu* main_menu = new MainMenu();
     HelpMenu* help_menu = new HelpMenu();
 
@@ -40,7 +40,7 @@ int main()
             }
         }
 
-        window.setView(v);
+        //window.setView(v);
 
         window.clear();
         int code;

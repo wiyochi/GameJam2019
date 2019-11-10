@@ -95,6 +95,11 @@ void Game::turn()
 	}
 }
 
+Player& Game::get_current_player()
+{
+	return _players[_nb_turn % _players.size()];
+}
+
 void Game::do_personalities(ushort const & player, short const & personality)
 {
 	if (_personalities.get_cost(personality) <= _players[player].get_money())

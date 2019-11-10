@@ -127,3 +127,8 @@ short Player::do_personalities_action()
 	} 
 	return choice;
 }
+
+ushort Player::get_pos() const
+{
+	return _pos;
+}

@@ -15,6 +15,8 @@
 
 #include <sstream>
 
+extern const char FONT_PATH[];
+
 constexpr unsigned int NB_CASES = 20;
 constexpr std::wstring_view  CASES_NAMES[NB_CASES] = {
     L"Le timor\noriental", L"France" , L"Pologne", L"Mongolie", L"Mexique",
@@ -82,9 +84,12 @@ private:
 	Button * _event_skip_button;
     sf::Text _text_code;
 
+    sf::Font                    _font;
+    sf::Text                    _text_turn;
     sf::RectangleShape          _rect;
     std::array<Case*, NB_CASES> _cases;
     View*                       _view;
+    sf::CircleShape             _pion[2];
 
     int _code;
     

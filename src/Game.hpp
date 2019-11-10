@@ -21,6 +21,7 @@ public:
 
 	GameState _state;
 	Personalities _personalities;
+	int _nb_turn;					// Nombre de tour actuellement joué
 
 	Game(uint16_t max_turn, ushort nb_joueur);
 	void end_of_turn();
@@ -31,6 +32,7 @@ public:
 	void buy(short person);
 	void events(ushort event);
 	void end();
+	Player& get_current_player();
 
 
 private:
@@ -39,7 +41,6 @@ private:
 	// Ajouter plateau
 	std::vector<Player> _players;	// Liste des joueurs
 	const uint16_t _max_turn; 		// Nombre total de tour dans la partie
-	int _nb_turn;					// Nombre de tour actuellement joué
 	ushort _dice_value;
 
 	void do_events(ushort const & player, ushort const & event);

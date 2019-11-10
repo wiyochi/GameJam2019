@@ -2,18 +2,18 @@
 
 Board::Board(sf::Vector2f pos):
     _g(Game(10, 2)),
-    _dice_button(new Button(L"Lancer les dés", sf::Vector2f(900, 100), sf::Vector2f(200, 40))),
-	_dice_p_button(new Button(L"Augmenter", sf::Vector2f(900, 150), sf::Vector2f(200, 40))),
-	_dice_m_button(new Button(L"Réduire", sf::Vector2f(900, 200), sf::Vector2f(200, 40))),
-	_dice_e_button(new Button(L"Conserver", sf::Vector2f(900, 250), sf::Vector2f(200, 40))),
-	_buy_cfy_button(new Button(L"Corrompre Cfy", sf::Vector2f(900, 300), sf::Vector2f(200, 40))),
-	_buy_guitton_button(new Button(L"Corrompre Guitton", sf::Vector2f(900, 350), sf::Vector2f(200, 40))),
-	_buy_armen_button(new Button(L"Corrompre Armen", sf::Vector2f(900, 400), sf::Vector2f(200, 40))),
-	_buy_skip_button(new Button(L"Skip Perso", sf::Vector2f(900, 650), sf::Vector2f(200, 40))),
-  	_event_1_button(new Button(L"Organiser un meeting", sf::Vector2f(900, 450), sf::Vector2f(200, 40))),
-	_event_2_button(new Button(L"Organiser une conférence", sf::Vector2f(900, 500), sf::Vector2f(200, 40))),
-	_event_spe_button(new Button(L"Organiser l'évènement spécial", sf::Vector2f(900, 550), sf::Vector2f(200, 40))),
-     _event_skip_button(new Button(L"Skip évènement", sf::Vector2f(900, 600), sf::Vector2f(200, 40))),
+    _dice_button(new Button(L"Lancer les dés", sf::Vector2f(1000, 50), sf::Vector2f(200, 40))),
+	_dice_p_button(new Button(L"Augmenter", sf::Vector2f(1000, 50), sf::Vector2f(200, 40))),
+	_dice_m_button(new Button(L"Réduire", sf::Vector2f(1000, 100), sf::Vector2f(200, 40))),
+	_dice_e_button(new Button(L"Conserver", sf::Vector2f(1000, 150), sf::Vector2f(200, 40))),
+	_buy_cfy_button(new Button(L"Corrompre Cfy", sf::Vector2f(1000, 100), sf::Vector2f(200, 40))),
+	_buy_guitton_button(new Button(L"Corrompre Guitton", sf::Vector2f(1000, 150), sf::Vector2f(200, 40))),
+	_buy_armen_button(new Button(L"Corrompre Armen", sf::Vector2f(1000, 200), sf::Vector2f(200, 40))),
+	_buy_skip_button(new Button(L"Skip Perso", sf::Vector2f(1000, 50), sf::Vector2f(200, 40))),
+  	_event_1_button(new Button(L"Organiser un meeting", sf::Vector2f(1000, 100), sf::Vector2f(200, 40))),
+	_event_2_button(new Button(L"Organiser une conférence", sf::Vector2f(1000, 150), sf::Vector2f(200, 40))),
+	_event_spe_button(new Button(L"Organiser l'évènement spécial", sf::Vector2f(1000, 200), sf::Vector2f(200, 40))),
+     _event_skip_button(new Button(L"Skip évènement", sf::Vector2f(1000, 50), sf::Vector2f(200, 40))),
 	 _code(0)
 {
     /*
@@ -27,6 +27,14 @@ Board::Board(sf::Vector2f pos):
     _event_2_button->set_active(false);
     _event_spe_button->set_active(false);
 */
+    if (_font.loadFromFile(FONT_PATH))
+	{
+		_text_turn.setFont(_font);
+		_text_turn.setFillColor(sf::Color::White);
+		_text_turn.setStyle(sf::Text::Bold);
+		_text_turn.setCharacterSize(15);
+        _text_turn.setPosition(sf::Vector2f(1000.f, 0.f));
+	}
     _rect.setPosition(pos);
     _rect.setOutlineThickness(1);
     _rect.setOutlineColor(sf::Color::White);
@@ -62,7 +70,7 @@ Board::Board(sf::Vector2f pos):
             _cases[i]->rotate(-90.f);
     }
 
-    _view = new View(sf::Vector2f(pos.x + cases_size.x + 10, pos.y + cases_size.y + 10), sf::Vector2f(cases_size.x * (NB_CASES / 4 - 1) - 20, cases_size.y * (NB_CASES / 4 - 1) - 20));
+    _view = new View(sf::Vector2f(pos.x + cases_size.y + 10, pos.y + cases_size.y + 10), sf::Vector2f(cases_size.x * (NB_CASES / 4) - 20, cases_size.x * (NB_CASES / 4) - 20));
 
     constexpr char FONT_NOD_PATH[] = "resources/fonts/Roboto-Thin.ttf";
     sf::Font * font = new sf::Font();
@@ -70,6 +78,13 @@ Board::Board(sf::Vector2f pos):
 
     _text_code = sf::Text("Code", *font, 20);
     _text_code.setPosition(700, 100);
+
+    _pion[0].setRadius(10);
+    _pion[0].setFillColor(sf::Color::Red);
+    _pion[0].setPosition(_cases[0]->get_position());
+    _pion[1].setRadius(10);
+    _pion[1].setFillColor(sf::Color::Blue);
+    _pion[1].setPosition(_cases[0]->get_position());
 
 }
 
@@ -212,6 +227,10 @@ void Board::update(sf::Window& window)
     << "\n - " << _g._personalities.get_owner(0)
     << "\n - " << _g._personalities.get_owner(0);
     _text_code.setString(oss.str());
+
+    _text_turn.setString(_g.get_current_player().get_name());
+
+    _pion[_g._nb_turn % 2].setPosition(_cases[_g.get_current_player().get_pos()]->get_position());
 }
 
 int & Board::get_code()
@@ -238,4 +257,8 @@ void Board::draw(sf::RenderTarget& target, sf::RenderStates states) const
     target.draw(*_event_skip_button, states);
 
     target.draw(_text_code, states);
+    target.draw(_text_turn, states);
+
+    target.draw(_pion[0], states);
+    target.draw(_pion[1], states);
 }

@@ -33,6 +33,7 @@ public:
     std::wstring const & get_name() const;
     sf::RectangleShape& get_rect();
     void rotate(float angle);
+    sf::Vector2f get_position() const;
 
 protected:
     sf::Texture         _texture;
