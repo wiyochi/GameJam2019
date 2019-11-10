@@ -5,12 +5,15 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
+#include "../../CaseLogic.hpp"
+
 extern const char FONT_PATH[];
 extern const char TEXTURE_PATH[];
 
 class Case : public sf::Drawable
 {
 public:
+    CaseLogic * _case_logic;
     enum Type
     {
         Live,
@@ -23,7 +26,7 @@ public:
     };
 
     Case();
-    Case(std::wstring const & name, Type type, sf::Vector2f const & pos, sf::Vector2f const & size);
+    Case(std::wstring const & name, Type type, sf::Vector2f const & pos, sf::Vector2f const & size, CaseLogic * case_logic = nullptr);
     ~Case();
 
     Type get_type() const;

@@ -25,6 +25,7 @@ public:
 	int get_money() const;													// Récupération du flouzz du joueur
 	void set_money(uint money);												// Changement de l'argent du joueur
 	void play(ushort dice_value, bool have_scify, ushort & event, short & personalities);	// Ensemble du tour du joueur
+	ushort get_pos() const;
 };
 
 #endif

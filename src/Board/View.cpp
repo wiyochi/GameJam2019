@@ -51,9 +51,9 @@ void View::set_case(Case* c)
         if (Pays * p = dynamic_cast<Pays*>(_case))
         {
             oss << "Adhérent à Terre Plate: ";
-            oss << p->get_member_flat() << std::endl;
+            oss << p->_case_logic->get_member_flat() << std::endl;
             oss << "Adhérent à Terre Ronde: ";
-            oss << p->get_member_glob() << std::endl;
+            oss << p->_case_logic->get_member_glob() << std::endl;
             _text_center.setString(oss.str());
         }
         break;

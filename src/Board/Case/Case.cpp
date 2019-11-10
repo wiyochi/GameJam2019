@@ -9,7 +9,8 @@ Case::Case()
 {
 }
 
-Case::Case(std::wstring const & name, Type type, sf::Vector2f const & pos, sf::Vector2f const & size) :
+Case::Case(std::wstring const & name, Type type, sf::Vector2f const & pos, sf::Vector2f const & size, CaseLogic * case_logic) :
+    _case_logic(case_logic),
     _rect(sf::Vector2f(size.x - 2, size.y - 2)),
     _type(type),
     _name(name)

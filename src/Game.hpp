@@ -7,6 +7,7 @@
 #include <vector>
 
 #include "Player.hpp"
+#include "CaseLogic.hpp"
 #include "Personalities.hpp"
 
 class Game
@@ -31,6 +32,7 @@ public:
 	void buy(short person);
 	void events(ushort event);
 	void end();
+	std::array<CaseLogic, 20> _cases_logic;
 
 
 private:

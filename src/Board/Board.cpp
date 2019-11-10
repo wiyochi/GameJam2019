@@ -49,7 +49,7 @@ Board::Board(sf::Vector2f pos):
             _cases[i] = new Taxes(sf::Vector2f(pos.x + CASES_X[i], pos.y + CASES_Y[i]), cases_size);
             break;
         default:
-            _cases[i] = new Pays(std::wstring(CASES_NAMES[i]), CASES_TYPES[i], sf::Vector2f(pos.x + CASES_X[i], pos.y + CASES_Y[i]), cases_size);
+            _cases[i] = new Pays(std::wstring(CASES_NAMES[i]), CASES_TYPES[i], sf::Vector2f(pos.x + CASES_X[i], pos.y + CASES_Y[i]), cases_size, &_g._cases_logic[i]);
             break;
         }
         if (i < div)

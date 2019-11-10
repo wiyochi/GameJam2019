@@ -30,7 +30,7 @@ void Game::cfy(int c)
 		_dice_value++;
 	else if (c == 2)
 		_dice_value--;
-		
+
 	_state = WAIT_EVENTS;
 }
 
@@ -45,7 +45,32 @@ void Game::buy(short person)
 
 void Game::events(ushort event)
 {
-	// TODO EVENTS
+	constexpr int costs[] = {1000, 2000, 5000};
+
+	if (_players[_nb_turn%2].get_money() >= costs[event])
+	{
+		_players[_nb_turn%2].set_money(_players[_nb_turn%2].get_money() - costs[event]);
+	
+		
+		unsigned int nb_g = _cases_logic[_players[_nb_turn % 2].get_pos() % 20].get_member_glob();
+		unsigned int nb_f = _cases_logic[_players[_nb_turn % 2].get_pos() % 20].get_member_flat();
+		
+		unsigned int mv; // Personne changée
+		if (_nb_turn % 2 == 0) // Globiste
+		{
+			mv = 0.1 * nb_g;
+			nb_g+=mv; // TODO : rand 
+			nb_f-=mv; // TODO : ajouter des mins
+		} else 
+		{
+			mv = 0.1 * nb_f;
+			nb_f+=mv; // TODO : rand 
+			nb_g-=mv; // TODO : ajouter des mins
+		}
+
+		_cases_logic[_players[_nb_turn % 2].get_pos() % 20].set_member_glob(nb_g);
+		_cases_logic[_players[_nb_turn % 2].get_pos() % 20].set_member_flat(nb_f);
+	}
 }
 
 void Game::end()
