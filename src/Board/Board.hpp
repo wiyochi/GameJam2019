@@ -12,10 +12,10 @@
 
 constexpr unsigned int NB_CASES = 20;
 constexpr std::wstring_view  CASES_NAMES[NB_CASES] = {
-    L"Le timor oriental", L"France" , L"Pologne", L"Mongolie", L"Mexique",
-    L"US", L"Corée du nord", L"Japon", L"Chance", L"Allemagne",
+    L"Le timor\noriental", L"France" , L"Pologne", L"Mongolie", L"Mexique",
+    L"US", L"Corée\ndu nord", L"Japon", L"Chance", L"Allemagne",
     L"Australie", L"Paraguay", L"Chance", L"Perou", L"Egypte",
-    L"Russie", L"Impots", L"Nouvelle Zelande", L"Chance", L"Chine"
+    L"Russie", L"Impots", L"Nouvelle\nZelande", L"Chance", L"Chine"
 };
 constexpr Case::Type        CASES_TYPES[NB_CASES] = {
     Case::Education, Case::Propaganda, Case::Goulag, Case::Education, Case::Propaganda,

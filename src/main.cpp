@@ -15,7 +15,7 @@ enum STATES {
 
 int main()
 {
-    STATES state = MAIN_MENU;
+    STATES state = GAME;
     
     Game g(20, 2);
    // g.run();
@@ -26,7 +26,7 @@ int main()
 
     sf::RenderWindow window(sf::VideoMode(1000, 1000), "Monop mais pas monop");
 
-    //sf::View v;
+    sf::View v;
     
     Board* b = new Board(sf::Vector2f(50.f, 50.f));
     MainMenu* main_menu = new MainMenu();
@@ -44,13 +44,13 @@ int main()
             else if (event.type == sf::Event::MouseWheelMoved)
             {
                 if (event.mouseWheel.delta > 0)
-                    ;//v.zoom(0.9f);
+                    v.zoom(0.9f);
                 else
-                    ;//v.zoom(1.1f);
+                    v.zoom(1.1f);
             }
         }
 
-        //window.setView(v);
+        window.setView(v);
 
         window.clear();
         int code;

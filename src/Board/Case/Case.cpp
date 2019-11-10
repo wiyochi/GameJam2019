@@ -14,6 +14,7 @@ Case::Case(std::wstring const & name, Type type, sf::Vector2f const & pos, sf::V
     _type(type),
     _name(name)
 {
+    //_rect.setOrigin(sf::Vector2f(pos.x + 1, pos.y + 1));
     _rect.setPosition(sf::Vector2f(pos.x + 1, pos.y + 1));
     _rect.setOutlineThickness(1);
     _rect.setOutlineColor(sf::Color::White);
@@ -64,9 +65,13 @@ Case::Case(std::wstring const & name, Type type, sf::Vector2f const & pos, sf::V
 	}
 
     sf::Rect text_size(_country.getGlobalBounds());
-    _country.setOrigin(pos);
-    _country.setPosition(sf::Vector2f(pos.x + size.x / 2 - text_size.width / 2, pos.y + size.y / 4 - text_size.height / 2));
-    
+    //_country.setPosition(sf::Vector2f(pos.x + size.x / 2 - text_size.width / 2 - 40, pos.y + size.y / 4 - text_size.height / 2 - 20));
+    _country.setPosition(sf::Vector2f(pos.x + 20, pos.y + 20));
+
+    _country.setOrigin(sf::Vector2f(- 20, - 20));
+    _country.setOutlineThickness(1);
+    _country.setOutlineColor(sf::Color::Red);
+
     if (_texture.loadFromFile(path))
     {
         _rect.setTexture(&_texture);
@@ -126,4 +131,5 @@ void Case::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     target.draw(_rect, states);
     target.draw(_country, states);
+    target.draw(_c_shape, states);
 }

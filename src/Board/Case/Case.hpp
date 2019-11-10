@@ -39,6 +39,7 @@ protected:
     sf::RectangleShape  _rect;
     sf::Font            _font;
     sf::Text            _country;
+    sf::RectangleShape  _c_shape;
     Type                _type;
     std::wstring        _name;
     bool                _viewed;
