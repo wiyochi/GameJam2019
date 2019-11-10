@@ -35,13 +35,13 @@ public:
 	void end();
 	Player& get_current_player();
 	std::array<CaseLogic, 20> _cases_logic;
+	std::vector<Player> _players;	// Liste des joueurs
 
 
 private:
 	static constexpr ushort MAX_DICE = 8;
 	static constexpr int MONEY = 30000;
 	// Ajouter plateau
-	std::vector<Player> _players;	// Liste des joueurs
 	const uint16_t _max_turn; 		// Nombre total de tour dans la partie
 	ushort _dice_value;
 
