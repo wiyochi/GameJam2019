@@ -4,6 +4,7 @@ Game::Game(uint16_t max_turn, ushort nb_players):
 	_state(START_TURN),
 	_max_turn(max_turn),
 	gen(rd()),
+	dis_dice(1, MAX_DICE),
 	dis_meeting(40000, 60000),
 	dis_conference(80000, 100000),
 	dis_special(300000, 350000)
@@ -21,7 +22,7 @@ Game::Game(uint16_t max_turn, ushort nb_players):
 
 void Game::dice()
 {
-	_dice_value = rand() % MAX_DICE;
+	_dice_value = dis_dice(gen);
 	if(_personalities.get_owner(Personalities::SCIFY) == _nb_turn % 2)
 		_state = WAIT_CFY;
 	else 

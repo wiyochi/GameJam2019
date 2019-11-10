@@ -47,6 +47,7 @@ private:
 	ushort _dice_value;
 	std::random_device rd;
 	std::mt19937 gen;
+	std::uniform_int_distribution<int> dis_dice;
 	std::uniform_int_distribution<int> dis_meeting;
 	std::uniform_int_distribution<int> dis_conference;
 	std::uniform_int_distribution<int> dis_special;

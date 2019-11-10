@@ -19,10 +19,10 @@ extern const char FONT_PATH[];
 
 constexpr unsigned int NB_CASES = 20;
 constexpr std::wstring_view  CASES_NAMES[NB_CASES] = {
-    L"Le timor\noriental", L"France" , L"Pologne", L"Mongolie", L"Mexique",
-    L"US", L"Corée\ndu nord", L"Japon", L"Chance", L"Allemagne",
-    L"Australie", L"Paraguay", L"Chance", L"Perou", L"Egypte",
-    L"Russie", L"Impots", L"Nouvelle\nZelande", L"Chance", L"Chine"
+    L"Timo", L"Fr" , L"Polo", L"Mong", L"Mex",
+    L"US", L"Corée", L"Jap", L"Chance", L"De",
+    L"Aus", L"Para", L"Chance", L"Per", L"Egypte",
+    L"Ru", L"Impots", L"NewZ", L"Chance", L"Chine"
 };
 constexpr Case::Type        CASES_TYPES[NB_CASES] = {
     Case::Education, Case::Propaganda, Case::Goulag, Case::Education, Case::Propaganda,
@@ -31,20 +31,6 @@ constexpr Case::Type        CASES_TYPES[NB_CASES] = {
     Case::Goulag, Case::Taxes, Case::Live, Case::Chance, Case::Goulag
 };
 
-/*
-constexpr float             CASES_X[NB_CASES] = {
-    0.0f, 100.f, 200.f, 300.f, 400.f, 500.f,
-    500.f, 500.f, 500.f, 500.f, 500.f,
-    400.f, 300.f, 200.f, 100.f, 0.f,
-    0.f, 0.f, 0.f, 0.f
-};
-
-constexpr float             CASES_Y[NB_CASES] = {
-    0.0f, 0.f, 0.f, 0.f, 0.f, 0.f,
-    100.f, 200.f, 300.f, 400.f, 500.f,
-    500.f, 500.f, 500.f, 500.f, 500.f,
-    400.f, 300.f, 200.f, 100.f
-};*/
 constexpr float             CASES_X[NB_CASES] = {
     150.0f, 250.f, 350.f, 450.f, 550.f,
     800.f, 800.f, 800.f, 800.f, 800.f,
