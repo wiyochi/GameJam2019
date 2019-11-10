@@ -4,13 +4,8 @@ Game::Game(uint16_t max_turn, ushort nb_players):
 	_state(START_TURN),
 	_max_turn(max_turn)
 {
-	for (ushort i = 0; i < nb_players; i++)
-	{
-		std::ostringstream oss;
-		oss << "Player " << i + 1;
-		std::string name = oss.str();
-		_players.push_back(Player(name));
-	}
+	_players.push_back(Player("Globistes"));
+	_players.push_back(Player("Platistes"));
 	//std::getchar();
 	
 }
@@ -106,7 +101,6 @@ void Game::end_of_turn()
 			_players[i].set_money(_players[i].get_money() + 1.5 * (MONEY));
 		else
 			_players[i].set_money(_players[i].get_money() + MONEY);
-		
 	}
 }
 

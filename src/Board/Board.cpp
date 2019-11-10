@@ -20,10 +20,10 @@ Board::Board(sf::Vector2f pos):
     if (_font.loadFromFile(FONT_PATH))
 	{
 		_text_turn.setFont(_font);
-		_text_turn.setFillColor(sf::Color::White);
+		_text_turn.setFillColor(sf::Color::Black);
 		_text_turn.setStyle(sf::Text::Bold);
 		_text_turn.setCharacterSize(15);
-        _text_turn.setPosition(sf::Vector2f(1000.f, 0.f));
+        _text_turn.setPosition(sf::Vector2f(1100, 100));
 
         _corrupted.setFont(_font);
         _corrupted.setFillColor(sf::Color::Black);
@@ -239,6 +239,11 @@ void Board::update(sf::Window& window)
     std::wstringstream wss;
     wss << L"Valeur du dé :" << std::endl << "           " << _g.get_dice();
     _dice_value.setString(wss.str());
+
+    oss.str("");
+    oss.clear();
+    oss << "Au tour des " << _g.get_current_player().get_name() << " :";
+    _text_turn.setString(oss.str());
 }
 
 int & Board::get_code()
