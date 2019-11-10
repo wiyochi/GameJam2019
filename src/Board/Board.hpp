@@ -70,6 +70,7 @@ private:
 	Button * _event_skip_button;
     sf::Text _corrupted;
     sf::Text _text_code;
+    sf::Text _dice_value;
 
     sf::Font                    _font;
     sf::Text                    _text_turn;

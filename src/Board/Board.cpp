@@ -2,34 +2,41 @@
 
 Board::Board(sf::Vector2f pos):
     _g(Game(10, 2)),
-    _dice_button(new Button(L"Lancer les dés", sf::Vector2f(1350, 150), sf::Vector2f(200, 40))),
-	_dice_p_button(new Button(L"Augmenter", sf::Vector2f(1350, 150), sf::Vector2f(200, 40))),
-	_dice_m_button(new Button(L"Réduire", sf::Vector2f(1350, 200), sf::Vector2f(200, 40))),
-	_dice_e_button(new Button(L"Conserver", sf::Vector2f(1350, 250), sf::Vector2f(200, 40))),
-	_buy_cfy_button(new Button(L"Corrompre Cfy", sf::Vector2f(1350, 200), sf::Vector2f(200, 40))),
-	_buy_guitton_button(new Button(L"Corrompre Guitton", sf::Vector2f(1350, 300), sf::Vector2f(200, 40))),
-	_buy_armen_button(new Button(L"Corrompre Armen", sf::Vector2f(1350, 250), sf::Vector2f(200, 40))),
-	_buy_skip_button(new Button(L"Skip Perso", sf::Vector2f(1350, 150), sf::Vector2f(200, 40))),
-  	_event_1_button(new Button(L"Organiser un meeting", sf::Vector2f(1350, 200), sf::Vector2f(200, 40))),
-	_event_2_button(new Button(L"Organiser une conférence", sf::Vector2f(1350, 250), sf::Vector2f(200, 40))),
-	_event_spe_button(new Button(L"Organiser l'évènement spécial", sf::Vector2f(1350, 300), sf::Vector2f(200, 40))),
-    _event_skip_button(new Button(L"Skip évènement", sf::Vector2f(1350, 150), sf::Vector2f(200, 40))),
+    _dice_button(new Button(L"Lancer les dés", sf::Vector2f(1300, 150), sf::Vector2f(300, 40))),
+	_dice_p_button(new Button(L"Augmenter", sf::Vector2f(1300, 150), sf::Vector2f(300, 40))),
+	_dice_m_button(new Button(L"Réduire", sf::Vector2f(1300, 200), sf::Vector2f(300, 40))),
+	_dice_e_button(new Button(L"Conserver", sf::Vector2f(1300, 250), sf::Vector2f(300, 40))),
+	_buy_cfy_button(new Button(L"Corrompre Cfy", sf::Vector2f(1300, 200), sf::Vector2f(300, 40))),
+	_buy_guitton_button(new Button(L"Corrompre Guitton", sf::Vector2f(1300, 300), sf::Vector2f(300, 40))),
+	_buy_armen_button(new Button(L"Corrompre Armen", sf::Vector2f(1300, 250), sf::Vector2f(300, 40))),
+	_buy_skip_button(new Button(L"Skip Perso", sf::Vector2f(1300, 150), sf::Vector2f(300, 40))),
+  	_event_1_button(new Button(L"Organiser un meeting", sf::Vector2f(1300, 200), sf::Vector2f(300, 40))),
+	_event_2_button(new Button(L"Organiser une conférence", sf::Vector2f(1300, 250), sf::Vector2f(300, 40))),
+	_event_spe_button(new Button(L"Organiser l'évènement spécial", sf::Vector2f(1300, 300), sf::Vector2f(300, 40))),
+    _event_skip_button(new Button(L"Skip évènement", sf::Vector2f(1300, 150), sf::Vector2f(300, 40))),
     _tout(sf::Vector2f(1920, 1080)),
     _code(0)
 {
     if (_font.loadFromFile(FONT_PATH))
 	{
 		_text_turn.setFont(_font);
-		_text_turn.setFillColor(sf::Color::White);
+		_text_turn.setFillColor(sf::Color::Black);
 		_text_turn.setStyle(sf::Text::Bold);
 		_text_turn.setCharacterSize(15);
-        _text_turn.setPosition(sf::Vector2f(1000.f, 0.f));
+        _text_turn.setPosition(sf::Vector2f(1100, 100));
 
         _corrupted.setFont(_font);
         _corrupted.setFillColor(sf::Color::Black);
         _corrupted.setCharacterSize(20);
         _corrupted.setString("Thunes");
         _corrupted.setPosition(sf::Vector2f(1350, 600));
+
+        
+        _dice_value.setFont(_font);
+        _dice_value.setFillColor(sf::Color::Black);
+        _dice_value.setCharacterSize(20);
+        _dice_value.setString(L"Dé");
+        _dice_value.setPosition(sf::Vector2f(1100, 200));
 
 	}
     _rect.setPosition(pos);
@@ -233,6 +240,14 @@ void Board::update(sf::Window& window)
     {
         _cases[_g._players[0].get_pos()]->setOutlineColor(sf::Color::Magenta);
     }
+    std::wstringstream wss;
+    wss << L"Valeur du dé :" << std::endl << "           " << _g.get_dice();
+    _dice_value.setString(wss.str());
+
+    oss.str("");
+    oss.clear();
+    oss << "Au tour des " << _g.get_current_player().get_name() << " :";
+    _text_turn.setString(oss.str());
 }
 
 int & Board::get_code()
@@ -263,4 +278,7 @@ void Board::draw(sf::RenderTarget& target, sf::RenderStates states) const
     target.draw(_text_turn, states);
 
     target.draw(_corrupted);
+
+    if(_g._state != Game::START_TURN)
+        target.draw(_dice_value, states);
 }

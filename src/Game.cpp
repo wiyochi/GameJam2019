@@ -21,6 +21,9 @@ Game::Game(uint16_t max_turn, short nb_players):
 		std::string name = oss.str();
 		_players.push_back(Player(name));
 	}
+	_players.push_back(Player("Globistes"));
+	_players.push_back(Player("Platistes"));
+	//std::getchar();
 	
 }
 
@@ -136,7 +139,6 @@ void Game::end_of_turn()
 			_players[i].set_money(_players[i].get_money() + 1.5 * (MONEY));
 		else
 			_players[i].set_money(_players[i].get_money() + MONEY);
-		
 	}
 }
 
@@ -165,4 +167,9 @@ void Game::do_personalities(short const & player, short const & personality)
 		_players[player].set_money(_personalities.get_cost(personality));
 }
 
-void Game::do_events(short const &, short const &){}
+void Game::do_events(ushort const &, ushort const &){}
+
+ushort Game::get_dice() const
+{
+	return _dice_value;
+}

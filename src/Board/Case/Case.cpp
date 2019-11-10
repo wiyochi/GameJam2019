@@ -27,31 +27,31 @@ Case::Case(std::wstring const & name, Type type, sf::Vector2f const & pos, sf::V
     {
     case Case::Type::Live:
         c = sf::Color::Red;
-        path.append("card_red.png");
+        path.append("card_red_2.png");
         break;
     case Case::Type::Goulag:
         c = sf::Color::Blue;
-        path.append("card_blue.png");
+        path.append("card_blue_2.png");
         break;
     case Case::Type::Propaganda:
         c = sf::Color::Green;
-        path.append("card_green.png");
+        path.append("card_green_2.png");
         break;
     case Case::Type::Education:
         c = sf::Color::Yellow;
-        path.append("card_yellow.png");
+        path.append("card_yellow_2.png");
         break;
     case Case::Type::Chance:
         c = sf::Color(40, 40, 40);
-        path.append("card_purple.png");
+        path.append("card_black_2.png");
         break;
     case Case::Type::Taxes:
         c = sf::Color(40, 40, 40);
-        path.append("card_purple.png");
+        path.append("card_black_2.png");
         break;
     case Case::Type::USA:
         c = sf::Color(40, 40, 40);
-        path.append("card_purple.png");
+        path.append("card_purple_2.png");
         break;
     }
     //_rect.setFillColor(c);

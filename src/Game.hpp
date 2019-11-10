@@ -37,6 +37,7 @@ public:
 	Player& get_current_player();
 	std::array<CaseLogic, 20> _cases_logic;
 	std::vector<Player> _players;	// Liste des joueurs
+	ushort get_dice() const;
 
 
 private:
