@@ -59,7 +59,7 @@ Case::Case(std::wstring const & name, Type type, sf::Vector2f const & pos, sf::V
     if (_font.loadFromFile(FONT_PATH))
 	{
 		_country.setFont(_font);
-		_country.setFillColor(sf::Color::White);
+		_country.setFillColor(sf::Color::Black);
 		_country.setString(_name);
 		_country.setStyle(sf::Text::Bold);
 		_country.setCharacterSize(15);
@@ -70,8 +70,8 @@ Case::Case(std::wstring const & name, Type type, sf::Vector2f const & pos, sf::V
     _country.setPosition(sf::Vector2f(pos.x + 20, pos.y + 20));
 
     _country.setOrigin(sf::Vector2f(- 20, - 20));
-    _country.setOutlineThickness(1);
-    _country.setOutlineColor(sf::Color::Red);
+    //_country.setOutlineThickness(1);
+    //_country.setOutlineColor(sf::Color::Red);
 
     if (_texture.loadFromFile(path))
     {
