@@ -19,6 +19,7 @@ int main()
     STATES state = MAIN_MENU;
 
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "Monop mais pas monop", sf::Style::Fullscreen);
+    window.setVerticalSyncEnabled(true);
     sf::View v;
     
     Board* b = new Board(sf::Vector2f(100, 150));
