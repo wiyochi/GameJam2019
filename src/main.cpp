@@ -31,13 +31,6 @@ int main()
         {
             if (event.type == sf::Event::Closed)
                 window.close();
-            else if (event.type == sf::Event::MouseWheelMoved)
-            {
-                if (event.mouseWheel.delta > 0)
-                    v.zoom(0.9f);
-                else
-                    v.zoom(1.1f);
-            }
         }
 
         //window.setView(v);
