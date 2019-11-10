@@ -20,6 +20,8 @@ private:
 	short do_board_action();												// Faire les actions par rapport à la case
 	short do_personalities_action(); 										// Possibilité d'acheter des personnalitées.
 public:
+	int _nb_pays;
+
 	Player(std::string name);												// Création d'un nouveau joueur
 	std::string const & get_name() const;									// Renvoie le nom du joueur
 	int get_money() const;													// Récupération du flouzz du joueur

@@ -9,7 +9,8 @@
 enum STATES {
     MAIN_MENU,
     HELP_MENU,
-    GAME
+    GAME,
+    END_SCREEN
 };
 
 
@@ -23,6 +24,17 @@ int main()
     Board* b = new Board(sf::Vector2f(100, 150));
     MainMenu* main_menu = new MainMenu();
     HelpMenu* help_menu = new HelpMenu();
+
+    sf::Font font;
+    if (font.loadFromFile("resources/fonts/Roboto-Thin.ttf"))
+    {
+        sf::Text text_fin;
+        text_fin.setFont(font);
+        text_fin.setFillColor(sf::Color::White);
+        text_fin.setStyle(sf::Text::Bold);
+        text_fin.setCharacterSize(50);
+    }
+
     while (window.isOpen())
     {
         sf::Event event;
@@ -58,6 +70,12 @@ int main()
                 window.draw(*main_menu);
                 break;
             case HELP_MENU:
+                help_menu->update(window);
+                window.draw(*help_menu);
+                if (help_menu->get_back())
+                    state = MAIN_MENU;
+                break;
+            case END_SCREEN:
                 help_menu->update(window);
                 window.draw(*help_menu);
                 if (help_menu->get_back())

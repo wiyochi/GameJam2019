@@ -1,7 +1,7 @@
 #include "Board.hpp"
 
 Board::Board(sf::Vector2f pos):
-    _g(Game(10, 2)),
+    _g(Game(20, 2)),
     _dice_button(new Button(L"Lancer les dés", sf::Vector2f(1300, 150), sf::Vector2f(300, 40))),
 	_dice_p_button(new Button(L"Augmenter", sf::Vector2f(1300, 150), sf::Vector2f(300, 40))),
 	_dice_m_button(new Button(L"Réduire", sf::Vector2f(1300, 200), sf::Vector2f(300, 40))),

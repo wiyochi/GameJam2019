@@ -71,6 +71,8 @@ void Game::events(short event)
 		unsigned int nb_g = _cases_logic[_players[_nb_turn % 2].get_pos() % 20].get_member_glob();
 		unsigned int nb_f = _cases_logic[_players[_nb_turn % 2].get_pos() % 20].get_member_flat();
 
+		int player_has_country = (nb_g > nb_f) ? 0 : 1;
+
 		int nb_rand = 0;
 		if (event == 1)
 			nb_rand = dis_meeting(gen);
@@ -107,6 +109,12 @@ void Game::events(short event)
 
 		_cases_logic[_players[_nb_turn % 2].get_pos() % 20].set_member_glob(nb_g);
 		_cases_logic[_players[_nb_turn % 2].get_pos() % 20].set_member_flat(nb_f);
+
+		nb_g = _cases_logic[_players[_nb_turn % 2].get_pos() % 20].get_member_glob();
+		nb_f = _cases_logic[_players[_nb_turn % 2].get_pos() % 20].get_member_flat();
+
+		_players[player_has_country]._nb_pays--;
+		_players[(nb_g > nb_f) ? 0 : 1]._nb_pays++;
 	}
 }
 
@@ -116,6 +124,18 @@ void Game::end()
 		end_of_turn();
 	_state = START_TURN;
 	_nb_turn++;
+
+	if (_nb_turn >= _max_turn)
+	{
+		if (_players[0]._nb_pays == _players[1]._nb_pays)
+			std::cout << "Egalité, la terre est une pyramide" << std::endl;
+		else if (_players[0]._nb_pays > _players[1]._nb_pays)
+			std::cout << "Bravo, les globistes ont gagné. La terre est ronde" << std::endl;
+		else
+			std::cout << "Bravo, les platistes ont gagné. La terre est plate" << std::endl;
+		
+		exit(0);
+	}
 }
 
 
