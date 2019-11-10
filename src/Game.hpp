@@ -5,6 +5,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <random>
 
 #include "Player.hpp"
 #include "CaseLogic.hpp"
@@ -44,6 +45,11 @@ private:
 	std::vector<Player> _players;	// Liste des joueurs
 	const uint16_t _max_turn; 		// Nombre total de tour dans la partie
 	ushort _dice_value;
+	std::random_device rd;
+	std::mt19937 gen;
+	std::uniform_int_distribution<int> dis_meeting;
+	std::uniform_int_distribution<int> dis_conference;
+	std::uniform_int_distribution<int> dis_special;
 
 	void do_events(ushort const & player, ushort const & event);
 	void do_personalities(ushort const & player, short const & personalities);

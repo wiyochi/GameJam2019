@@ -2,7 +2,11 @@
 
 Game::Game(uint16_t max_turn, ushort nb_players):
 	_state(START_TURN),
-	_max_turn(max_turn)
+	_max_turn(max_turn),
+	gen(rd()),
+	dis_meeting(40000, 60000),
+	dis_conference(80000, 100000),
+	dis_special(300000, 350000)
 {
 	for (ushort i = 0; i < nb_players; i++)
 	{
@@ -58,18 +62,39 @@ void Game::events(ushort event)
 		
 		unsigned int nb_g = _cases_logic[_players[_nb_turn % 2].get_pos() % 20].get_member_glob();
 		unsigned int nb_f = _cases_logic[_players[_nb_turn % 2].get_pos() % 20].get_member_flat();
-		
-		unsigned int mv; // Personne changée
+
+		int nb_rand = 0;
+		if (event == 1)
+			nb_rand = dis_meeting(gen);
+		else if (event == 2)
+			nb_rand = dis_conference(gen);
+		else
+			nb_rand = dis_special(gen);
+
 		if (_nb_turn % 2 == 0) // Globiste
 		{
-			mv = 0.1 * nb_g;
-			nb_g+=mv; // TODO : rand 
-			nb_f-=mv; // TODO : ajouter des mins
+			if ((int)nb_f - nb_rand > 0)
+			{
+				nb_g += nb_rand;
+				nb_f -= nb_rand;
+			}
+			else
+			{
+				nb_g += nb_f;
+				nb_f = 0;
+			}
 		} else 
 		{
-			mv = 0.1 * nb_f;
-			nb_f+=mv; // TODO : rand 
-			nb_g-=mv; // TODO : ajouter des mins
+			if ((int)nb_g - nb_rand > 0)
+			{
+				nb_f += nb_rand;
+				nb_g -= nb_rand;
+			}
+			else
+			{
+				nb_f += nb_g;
+				nb_g = 0;
+			}
 		}
 
 		_cases_logic[_players[_nb_turn % 2].get_pos() % 20].set_member_glob(nb_g);
