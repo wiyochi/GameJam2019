@@ -21,7 +21,10 @@ void Game::dice()
 	if(_personalities.get_owner(Personalities::SCIFY) == _nb_turn % 2)
 		_state = WAIT_CFY;
 	else 
+	{
 		_state = WAIT_EVENTS;
+		_players[_nb_turn % 2].move(_dice_value);
+	}
 }
 
 void Game::cfy(int c)
@@ -32,6 +35,7 @@ void Game::cfy(int c)
 		_dice_value--;
 
 	_state = WAIT_EVENTS;
+	_players[_nb_turn % 2].move(_dice_value);
 }
 
 void Game::buy(short person)
