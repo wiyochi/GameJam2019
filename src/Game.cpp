@@ -136,3 +136,8 @@ void Game::do_personalities(ushort const & player, short const & personality)
 }
 
 void Game::do_events(ushort const &, ushort const &){}
+
+ushort Game::get_dice() const
+{
+	return _dice_value;
+}

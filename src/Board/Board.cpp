@@ -4,7 +4,7 @@ Board::Board(sf::Vector2f pos):
     _g(Game(10, 2)),
     _dice_button(new Button(L"Lancer les dés", sf::Vector2f(1300, 150), sf::Vector2f(300, 40))),
 	_dice_p_button(new Button(L"Augmenter", sf::Vector2f(1300, 150), sf::Vector2f(300, 40))),
-	_dice_m_button(new Button(L"Réduire", sf::Vector2f(130, 200), sf::Vector2f(300, 40))),
+	_dice_m_button(new Button(L"Réduire", sf::Vector2f(1300, 200), sf::Vector2f(300, 40))),
 	_dice_e_button(new Button(L"Conserver", sf::Vector2f(1300, 250), sf::Vector2f(300, 40))),
 	_buy_cfy_button(new Button(L"Corrompre Cfy", sf::Vector2f(1300, 200), sf::Vector2f(300, 40))),
 	_buy_guitton_button(new Button(L"Corrompre Guitton", sf::Vector2f(1300, 300), sf::Vector2f(300, 40))),
@@ -30,6 +30,13 @@ Board::Board(sf::Vector2f pos):
         _corrupted.setCharacterSize(20);
         _corrupted.setString("Thunes");
         _corrupted.setPosition(sf::Vector2f(1350, 600));
+
+        
+        _dice_value.setFont(_font);
+        _dice_value.setFillColor(sf::Color::Black);
+        _dice_value.setCharacterSize(20);
+        _dice_value.setString(L"Dé");
+        _dice_value.setPosition(sf::Vector2f(1100, 200));
 
 	}
     _rect.setPosition(pos);
@@ -229,15 +236,9 @@ void Board::update(sf::Window& window)
     else if(_event_skip_button->is_clicked())
         _g._state = Game::WAIT_PERSO;
 
-    oss.clear();
-    oss << "Personnalities : \n" << _g._personalities.get_owner(0)
-    << "\n - " << _g._personalities.get_owner(0)
-    << "\n - " << _g._personalities.get_owner(0);
-    _text_code.setString(oss.str());
-
-    _text_turn.setString(_g.get_current_player().get_name());
-
-    _pion[_g._nb_turn % 2].setPosition(_cases[_g.get_current_player().get_pos()]->get_position());
+    std::wstringstream wss;
+    wss << L"Valeur du dé :" << std::endl << "           " << _g.get_dice();
+    _dice_value.setString(wss.str());
 }
 
 int & Board::get_code()
@@ -271,4 +272,7 @@ void Board::draw(sf::RenderTarget& target, sf::RenderStates states) const
     target.draw(_pion[1], states);
 
     target.draw(_corrupted);
+
+    if(_g._state != Game::START_TURN)
+        target.draw(_dice_value, states);
 }
