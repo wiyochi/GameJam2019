@@ -16,6 +16,7 @@ public:
 
     void set_case(Case* c);
     Case* get_case();
+    void update();
 
 private:
     sf::Vector2f        _pos;

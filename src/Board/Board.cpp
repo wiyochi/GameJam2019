@@ -189,6 +189,8 @@ void Board::update(sf::Window& window)
         }
     }
 
+    _view->update();
+
     _dice_button->update(window);
 	_dice_p_button->update(window);
 	_dice_m_button->update(window);

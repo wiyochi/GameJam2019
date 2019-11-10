@@ -74,3 +74,8 @@ void View::draw(sf::RenderTarget& target, sf::RenderStates states) const
     target.draw(_text_title, states);
     target.draw(_text_center, states);
 }
+
+void View::update()
+{
+    set_case(_case);
+}
