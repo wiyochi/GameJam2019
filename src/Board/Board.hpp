@@ -76,7 +76,6 @@ private:
     sf::RectangleShape          _rect;
     std::array<Case*, NB_CASES> _cases;
     View*                       _view;
-    sf::CircleShape             _pion[2];
     sf::Texture _img;
     sf::RectangleShape _tout;
 

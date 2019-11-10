@@ -37,6 +37,7 @@ public:
     sf::RectangleShape& get_rect();
     void rotate(float angle);
     sf::Vector2f get_position() const;
+    void setOutlineColor(sf::Color color);
 
 protected:
     sf::Texture         _texture;

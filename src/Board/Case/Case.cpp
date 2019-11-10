@@ -17,8 +17,8 @@ Case::Case(std::wstring const & name, Type type, sf::Vector2f const & pos, sf::V
 {
     //_rect.setOrigin(sf::Vector2f(pos.x + 1, pos.y + 1));
     _rect.setPosition(sf::Vector2f(pos.x + 1, pos.y + 1));
-    _rect.setOutlineThickness(1);
-    _rect.setOutlineColor(sf::Color::White);
+    _rect.setOutlineThickness(3);
+    _rect.setOutlineColor(sf::Color::Transparent);
 
     std::string path(TEXTURE_PATH);
     sf::Color c = sf::Color::White;
@@ -131,6 +131,11 @@ void Case::rotate(float angle)
 sf::Vector2f Case::get_position() const
 {
     return _rect.getPosition();
+}
+
+void Case::setOutlineColor(sf::Color color)
+{
+    _rect.setOutlineColor(color);
 }
 
 void Case::draw(sf::RenderTarget& target, sf::RenderStates states) const

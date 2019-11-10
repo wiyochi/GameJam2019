@@ -76,13 +76,6 @@ Board::Board(sf::Vector2f pos):
     _text_code = sf::Text("Code", *font, 20);
     _text_code.setPosition(700, 100);
 
-    _pion[0].setRadius(10);
-    _pion[0].setFillColor(sf::Color::Red);
-    _pion[0].setPosition(_cases[0]->get_position());
-    _pion[1].setRadius(10);
-    _pion[1].setFillColor(sf::Color::Blue);
-    _pion[1].setPosition(_cases[0]->get_position());
-
     _img.loadFromFile("resources/textures/book.png");
     _tout.setTexture(&_img);
 }
@@ -230,7 +223,16 @@ void Board::update(sf::Window& window)
 
     _text_turn.setString(_g.get_current_player().get_name());
 
-    _pion[_g._nb_turn % 2].setPosition(_cases[_g.get_current_player().get_pos()]->get_position());
+    std::for_each(_cases.begin(), _cases.end(), [&](Case* c){ c->setOutlineColor(sf::Color::Transparent); });
+    if (_cases[_g._players[0].get_pos()] != _cases[_g._players[1].get_pos()])
+    {
+        _cases[_g._players[0].get_pos()]->setOutlineColor(sf::Color::Red);
+        _cases[_g._players[1].get_pos()]->setOutlineColor(sf::Color::Blue);
+    }
+    else
+    {
+        _cases[_g._players[0].get_pos()]->setOutlineColor(sf::Color::Magenta);
+    }
 }
 
 int & Board::get_code()
@@ -259,9 +261,6 @@ void Board::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
     //target.draw(_text_code, states);
     target.draw(_text_turn, states);
-
-    target.draw(_pion[0], states);
-    target.draw(_pion[1], states);
 
     target.draw(_corrupted);
 }
