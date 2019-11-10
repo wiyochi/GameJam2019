@@ -1,6 +1,7 @@
 #include "Game.hpp"
 
 Game::Game(uint16_t max_turn, ushort nb_players):
+	_state(START_TURN),
 	_max_turn(max_turn)
 {
 	for (ushort i = 0; i < nb_players; i++)
@@ -13,87 +14,49 @@ Game::Game(uint16_t max_turn, ushort nb_players):
 	//std::getchar();
 	
 }
-/*
- * Liste des codes :
- * 0 : début de tour
- * 1 : a cliqué sur lancer dés
- * 2 : a cliqué sur plus dés
- * 3 : a cliqué sur moins dés
- * 4 : a cliqué sur garder dés
- * 5 : a cliqué sur payer cfy
- * 6 : a cliqué sur payer guitton
- * 7 : a cliqué sur payer armen
- * 8 : a cliqué sur event 1
- * 9 : a clique sur event 2
- * 10 : a cliqué sur event spé
- * 11 : jeu valide dé et par sur demande de cfy
- * 12 : pas de cfy on passe aux events
- * 13 : on a fini les events
- * 14 : fin de tour
- * 15 : en attente des perso
- * 16 : dés lancés
- */
-void Game::update(int & code)
+
+void Game::dice()
 {
-	Player & p = _players[_nb_turn % 2];
-	switch(code)
+	_dice_value = rand() % MAX_DICE;
+	if(_personalities.get_owner(Personalities::SCIFY) == _nb_turn % 2)
+		_state = WAIT_CFY;
+	else 
+		_state = WAIT_EVENTS;
+}
+
+void Game::cfy(int c)
+{
+	if (c == 1)
+		_dice_value++;
+	else if (c == 2)
+		_dice_value--;
+		
+	_state = WAIT_EVENTS;
+}
+
+void Game::buy(short person)
+{
+	if (_personalities.get_cost(person) <= _players[_nb_turn % 2].get_money())
 	{
-		case 1:
-			code = 12;
-			_dice_value = rand() % MAX_DICE;
-			if (_personalities.get_owner(Personalities::SCIFY) == _nb_turn % 2)
-				code = 11;
-			break;
-		case 2:
-			_dice_value++;
-			code = 12;
-			break;
-		case 3:
-			_dice_value--;
-			code = 12;
-			break;
-		case 4:
-			code = 12;
-			break;
-		case 5:
-			if (_personalities.get_cost(Personalities::SCIFY) <= p.get_money())
-			{
-				p.set_money(p.get_money() - _personalities.get_cost(Personalities::SCIFY));
-				//TODO : incrémenter cout & intégrer le temps de protection.
-				//     : add set_owner()
-			code = 14;
-			}
-			break;
-		case 6:
-			if (_personalities.get_cost(Personalities::GUITTON) <= p.get_money())
-			{
-				p.set_money(p.get_money() - _personalities.get_cost(Personalities::GUITTON));
-				//TODO : incrémenter cout & intégrer le temps de protection.
-				//     : add set_owner()
-			code = 14;
-			}
-			break;
-		case 7:
-			if (_personalities.get_cost(Personalities::ARMEN) <= p.get_money())
-			{
-				p.set_money(p.get_money() - _personalities.get_cost(Personalities::ARMEN));
-				//TODO : incrémenter cout & intégrer le temps de protection.
-				//     : add set_owner()
-			code = 14;
-			}
-			break;
-		case 8:
-			// TODO : implémenter la fonctionnalité des events
-			code = 15;
-			break;
-		case 9:
-			code = 15;
-			break;
-		case 10:
-			code = 15;
-			break;
+		_personalities.set_owner(person, _nb_turn % 2);
+		_players[_nb_turn % 2].set_money(_players[_nb_turn % 2].get_money() - _personalities.get_cost(person));
 	}
 }
+
+void Game::events(ushort event)
+{
+	// TODO EVENTS
+}
+
+void Game::end()
+{
+	if (_nb_turn % 2 == 1) // Les deux joueurs ont joués
+		end_of_turn();
+	_state = START_TURN;
+	_nb_turn++;
+}
+
+
 
 void Game::run()
 {
@@ -132,13 +95,10 @@ void Game::turn()
 	}
 }
 
-void Game::do_events(ushort const &, ushort const &)
-{
-
-}
-
 void Game::do_personalities(ushort const & player, short const & personality)
 {
 	if (_personalities.get_cost(personality) <= _players[player].get_money())
 		_players[player].set_money(_personalities.get_cost(personality));
 }
+
+void Game::do_events(ushort const &, ushort const &){}

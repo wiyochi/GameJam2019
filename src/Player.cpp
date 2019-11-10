@@ -1,7 +1,7 @@
 #include "Player.hpp"
 
 Player::Player(std::string name):
-	_name(name), _pos(0)
+	_name(name), _pos(0), _money(1000000000)
 {
 }
 

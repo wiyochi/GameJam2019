@@ -14,3 +14,8 @@ int Personalities::get_cost(short const & personality) const
 {
 	return _cost[personality];
 }
+
+void Personalities::set_owner(short const & personality, short p_id)
+{
+	_owners[personality] = p_id;
+}

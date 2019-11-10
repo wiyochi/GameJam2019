@@ -16,12 +16,6 @@ enum STATES {
 int main()
 {
     STATES state = MAIN_MENU;
-    
-    Game g(20, 2);
-
-
-
-
 
     sf::RenderWindow window(sf::VideoMode(1200, 800), "Monop mais pas monop");
     
@@ -45,8 +39,6 @@ int main()
             case GAME:
                 // Updates
                 b->update(window);
-
-                g.update(b->get_code());
                 
                 // Draws
                 window.draw(*b);
